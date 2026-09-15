@@ -1,0 +1,11 @@
+question,answer,type,options
+"What is the output of: SELECT 2 + 3;","5","mcq","5,2,3,23"
+"Write an SQL query to find all employees from the employees table.","SELECT * FROM employees;","coding",
+"What is a primary key in SQL?","A primary key uniquely identifies each record in a table","conceptual",
+"Which clause is used to filter results in SQL?","WHERE","mcq","WHERE,FILTER,HAVING,GROUP BY"
+"Write an SQL query to count employees in each department.","SELECT department, COUNT(*) FROM employees GROUP BY department;","coding",
+"What is the difference between INNER JOIN and LEFT JOIN?","INNER JOIN returns matching rows, LEFT JOIN returns all rows from left table","conceptual",
+"Which keyword is used to remove duplicate rows in SQL?","DISTINCT","mcq","DISTINCT,UNIQUE,REMOVE,DIFFERENT"
+"How do you add a new column to an existing table in SQL?","ALTER TABLE table_name ADD COLUMN column_name datatype;","coding",
+"What is a foreign key in SQL?","A foreign key links two tables together","conceptual",
+"What is the purpose of the HAVING clause in SQL?","HAVING filters results after aggregation","mcq","HAVING,GROUP BY,WHERE,ORDER BY"

@@ -1,0 +1,10 @@
+question,answer,type,options
+"What is the output of: cout << (2 + 3);","5","mcq","5,2,3,23"
+"Write a C++ function to calculate factorial.","int factorial(int n) { if (n <= 1) return 1; return n * factorial(n-1); }","coding"
+"What is a C++ class?","A class is a user-defined data type that contains data members and member functions","conceptual"
+"How do you declare a pointer in C++?","int* ptr;","mcq","int* ptr;,int &ptr;,pointer ptr;,&ptr"
+"Write a C++ function to reverse a string.","string reverseString(string s) { reverse(s.begin(), s.end()); return s; }","coding"
+"What is the difference between struct and class in C++?","struct members are public by default, class members are private by default","conceptual"
+"What is the purpose of the #include directive?","To include header files in C++","conceptual"
+"How do you handle memory allocation in C++?","Using new and delete operators, or smart pointers","conceptual"
+"What is a template in C++?","A template allows writing generic code that works with multiple data types","conceptual"

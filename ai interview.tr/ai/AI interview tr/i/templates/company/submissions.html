@@ -1,0 +1,167 @@
+{% extends "base.html" %}
+
+{% block title %}Student Submissions - AI Interview Platform{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2><i class="fas fa-users"></i> Student Submissions</h2>
+    <div>
+        <a href="{{ url_for('manage_datasets') }}" class="btn btn-info me-2">
+            <i class="fas fa-database"></i> Manage Datasets
+        </a>
+        <a href="{{ url_for('company_dashboard') }}" class="btn btn-secondary">
+            <i class="fas fa-arrow-left"></i> Dashboard
+        </a>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h4><i class="fas fa-file-alt"></i> Recent Exam Submissions</h4>
+            </div>
+            <div class="card-body">
+                {% if submissions %}
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Student Name</th>
+                                    <th>Email</th>
+                                    <th>Job Title</th>
+                                    <th>Domain</th>
+                                    <th>Score</th>
+                                    <th>HR Round</th>
+                                    <th>Submitted</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for submission in submissions %}
+                                <tr>
+                                    <td>
+                                        <strong>{{ submission.student_name }}</strong>
+                                        {% if not submission.get('reviewed', False) %}
+                                            <span class="badge bg-warning ms-1">New</span>
+                                        {% endif %}
+                                    </td>
+                                    <td>{{ submission.student_email }}</td>
+                                    <td>{{ submission.job_title }}</td>
+                                    <td>
+                                        <span class="badge bg-info">{{ submission.domain.upper() }}</span>
+                                    </td>
+                                    <td>
+                                        <strong class="{{ 'text-success' if submission.eligible_for_hr else 'text-danger' }}">
+                                            {{ submission.score }}/100
+                                        </strong>
+                                        {% if submission.cutoff_score %}
+                                        <br><small class="text-muted">Cutoff: {{ submission.cutoff_score }}%</small>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        {% if submission.eligible_for_hr %}
+                                            <span class="badge bg-success">
+                                                <i class="fas fa-check"></i> PASS
+                                            </span>
+                                        {% else %}
+                                            <span class="badge bg-danger">
+                                                <i class="fas fa-times"></i> FAIL
+                                            </span>
+                                        {% endif %}
+                                    </td>
+                                    <td>{{ submission.submitted_at.strftime('%Y-%m-%d %H:%M') }}</td>
+                                    <td>
+                                        {% if submission.get('reviewed', False) %}
+                                            <span class="badge bg-primary">Reviewed</span>
+                                        {% else %}
+                                            <span class="badge bg-warning">Pending</span>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        <a href="{{ url_for('view_submission', submission_id=submission._id) }}" 
+                                           class="btn btn-sm btn-outline-primary">
+                                            <i class="fas fa-eye"></i> View
+                                        </a>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                {% else %}
+                    <div class="text-center py-5">
+                        <i class="fas fa-file-alt fa-3x text-muted mb-3"></i>
+                        <h4>No Submissions Yet</h4>
+                        <p class="text-muted">Student submissions will appear here once they start taking exams.</p>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-3">
+        <div class="card bg-primary text-white">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <h4>{{ submissions|length }}</h4>
+                        <p>Total Submissions</p>
+                    </div>
+                    <div class="align-self-center">
+                        <i class="fas fa-file-alt fa-2x"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card bg-success text-white">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <h4>{{ submissions|selectattr('eligible_for_hr')|list|length }}</h4>
+                        <p>HR Eligible</p>
+                    </div>
+                    <div class="align-self-center">
+                        <i class="fas fa-user-check fa-2x"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card bg-warning text-dark">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <h4>{{ submissions|selectattr('reviewed', 'equalto', False)|list|length if submissions else 0 }}</h4>
+                        <p>Pending Review</p>
+                    </div>
+                    <div class="align-self-center">
+                        <i class="fas fa-clock fa-2x"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card bg-info text-white">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <h4>{{ "%.1f"|format((submissions|map(attribute='score')|sum / submissions|length)|float) if submissions and submissions|length > 0 else "0.0" }}</h4>
+                        <p>Average Score</p>
+                    </div>
+                    <div class="align-self-center">
+                        <i class="fas fa-chart-line fa-2x"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

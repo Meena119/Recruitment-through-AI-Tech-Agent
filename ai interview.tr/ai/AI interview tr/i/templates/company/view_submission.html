@@ -1,0 +1,283 @@
+{% extends "base.html" %}
+
+{% block title %}View Submission - AI Interview Platform{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2><i class="fas fa-file-alt"></i> Student Submission Details</h2>
+    <a href="{{ url_for('company_submissions') }}" class="btn btn-secondary">
+        <i class="fas fa-arrow-left"></i> Back to Submissions
+    </a>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fas fa-user"></i> Student Information</h5>
+            </div>
+            <div class="card-body">
+                <p><strong>Name:</strong> {{ submission.student_name }}</p>
+                <p><strong>Email:</strong> {{ submission.student_email }}</p>
+                <p><strong>Job:</strong> {{ submission.job_title }}</p>
+                <p><strong>Domain:</strong> 
+                    <span class="badge bg-info">{{ submission.domain.upper() }}</span>
+                </p>
+                <p><strong>Submitted:</strong> {{ submission.submitted_at.strftime('%Y-%m-%d %H:%M:%S') }}</p>
+                
+                <hr>
+                
+                <div class="text-center">
+                    <h3 class="{{ 'text-success' if submission.score >= 70 else 'text-warning' }}">
+                        {{ submission.score }}/100
+                    </h3>
+                    {% if submission.eligible_for_hr %}
+                        <span class="badge bg-success">Eligible for HR Round</span>
+                    {% else %}
+                        <span class="badge bg-secondary">Not Eligible for HR Round</span>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        
+        {% if submission.audio_transcripts %}
+        <div class="card mt-3">
+            <div class="card-header">
+                <h6><i class="fas fa-microphone"></i> Audio Transcripts</h6>
+            </div>
+            <div class="card-body">
+                {% for question, transcript in submission.audio_transcripts.items() %}
+                    {% if transcript %}
+                    <div class="mb-2">
+                        <small class="text-muted">{{ question }}:</small>
+                        <p class="mb-0">{{ transcript }}</p>
+                    </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+    </div>
+    
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fas fa-question-circle"></i> Question-wise Evaluation</h5>
+            </div>
+            <div class="card-body">
+                {% for answer in submission.evaluation_results %}
+                <div class="question-evaluation mb-4 p-3 border rounded">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h6>Question {{ loop.index }}:</h6>
+                            <p class="text-muted">{{ answer.question }}</p>
+                            {% if answer.question_type %}
+                                <span class="badge bg-secondary">{{ answer.question_type.title() }}</span>
+                            {% endif %}
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6><i class="fas fa-user"></i> Student's Answer:</h6>
+                            <div class="answer-box bg-light p-3 rounded">
+                                <pre class="mb-0">{{ answer.student_answer }}</pre>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <h6><i class="fas fa-check-circle"></i> Expected Answer:</h6>
+                            <div class="answer-box bg-success text-white p-3 rounded">
+                                <pre class="mb-0">{{ answer.correct_answer }}</pre>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Enhanced AI Scoring Dimensions -->
+                    {% if answer.dimension_scores %}
+                    <div class="row mt-3">
+                        <div class="col-md-12">
+                            <h6><i class="fas fa-brain"></i> Enhanced AI Scoring Analysis:</h6>
+                            <div class="row">
+                                {% for dimension, score in answer.dimension_scores.items() %}
+                                {% if score > 0 %}
+                                <div class="col-md-3 mb-2">
+                                    <div class="card border-{{ 'success' if score >= 70 else 'warning' if score >= 50 else 'danger' }}">
+                                        <div class="card-body p-2 text-center">
+                                            <div class="small text-muted">{{ dimension.replace('_', ' ').title() }}</div>
+                                            <div class="fw-bold {{ 'text-success' if score >= 70 else 'text-warning' if score >= 50 else 'text-danger' }}">{{ score }}/100</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endif %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                    
+                    <div class="row mt-3">
+                        <div class="col-md-12">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <span class="badge bg-primary fs-6">Score: {{ answer.score }}/100</span>
+                                    {% if answer.performance_level %}
+                                        <span class="badge bg-{{ 'success' if answer.performance_level in ['Excellent', 'Very Good'] else 'warning' if answer.performance_level == 'Good' else 'secondary' }} ms-2">{{ answer.performance_level }}</span>
+                                    {% else %}
+                                        {% if answer.score >= 70 %}
+                                            <span class="badge bg-success ms-2">Good</span>
+                                        {% elif answer.score >= 50 %}
+                                            <span class="badge bg-warning ms-2">Average</span>
+                                        {% else %}
+                                            <span class="badge bg-danger ms-2">Poor</span>
+                                        {% endif %}
+                                    {% endif %}
+                                </div>
+                                <small class="text-muted">
+                                    <i class="fas fa-robot"></i> Enhanced AI Evaluation
+                                    {% if answer.evaluation_timestamp %}
+                                        <br>{{ answer.evaluation_timestamp[:19] }} UTC
+                                    {% endif %}
+                                </small>
+                            </div>
+                            
+                            {% if answer.feedback %}
+                            <div class="mt-2">
+                                <h6><i class="fas fa-comment"></i> AI Feedback:</h6>
+                                <div class="alert alert-info">
+                                    <pre class="mb-0">{{ answer.feedback }}</pre>
+                                </div>
+                            </div>
+                            {% endif %}
+                            
+                            <!-- Improvement Suggestions -->
+                            {% if answer.improvement_suggestions %}
+                            <div class="mt-2">
+                                <h6><i class="fas fa-lightbulb"></i> AI Improvement Suggestions:</h6>
+                                <div class="alert alert-warning">
+                                    <ul class="mb-0">
+                                        {% for suggestion in answer.improvement_suggestions %}
+                                        <li>{{ suggestion }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fas fa-chart-bar"></i> Enhanced AI Performance Summary</h5>
+            </div>
+            <div class="card-body">
+                <!-- AI Scoring Features -->
+                <div class="alert alert-info mb-3">
+                    <h6><i class="fas fa-brain"></i> Enhanced AI Analysis Features:</h6>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <ul class="list-unstyled mb-0">
+                                <li><i class="fas fa-check text-success"></i> Multi-dimensional scoring</li>
+                                <li><i class="fas fa-check text-success"></i> Code execution validation</li>
+                                <li><i class="fas fa-check text-success"></i> Plagiarism detection</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <ul class="list-unstyled mb-0">
+                                <li><i class="fas fa-check text-success"></i> Adaptive difficulty weighting</li>
+                                <li><i class="fas fa-check text-success"></i> Comprehensive feedback</li>
+                                <li><i class="fas fa-check text-success"></i> Improvement suggestions</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="text-center">
+                            <h4 class="text-primary">{{ submission.score }}/100</h4>
+                            <p class="mb-0">Overall Score</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="text-center">
+                            <h4 class="text-success">{{ submission.evaluation_results|selectattr('score', 'ge', 70)|list|length }}/{{ submission.evaluation_results|length }}</h4>
+                            <p class="mb-0">Good Answers (≥70)</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="text-center">
+                            <h4 class="text-warning">{{ submission.evaluation_results|selectattr('score', 'ge', 50)|selectattr('score', 'le', 69)|list|length }}</h4>
+                            <p class="mb-0">Average Answers (50-69)</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="text-center">
+                            <h4 class="text-danger">{{ submission.evaluation_results|selectattr('score', 'lt', 50)|list|length }}</h4>
+                            <p class="mb-0">Poor Answers (<50)</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- AI Performance Levels -->
+                {% set excellent_count = submission.evaluation_results|selectattr('performance_level', 'equalto', 'Excellent')|list|length %}
+                {% set very_good_count = submission.evaluation_results|selectattr('performance_level', 'equalto', 'Very Good')|list|length %}
+                {% set good_count = submission.evaluation_results|selectattr('performance_level', 'equalto', 'Good')|list|length %}
+                
+                {% if excellent_count > 0 or very_good_count > 0 or good_count > 0 %}
+                <div class="row mt-3">
+                    <div class="col-md-12">
+                        <h6><i class="fas fa-trophy"></i> AI Performance Level Distribution:</h6>
+                        <div class="row">
+                            {% if excellent_count > 0 %}
+                            <div class="col-md-3">
+                                <div class="text-center">
+                                    <h5 class="text-success">{{ excellent_count }}</h5>
+                                    <p class="mb-0">Excellent</p>
+                                </div>
+                            </div>
+                            {% endif %}
+                            {% if very_good_count > 0 %}
+                            <div class="col-md-3">
+                                <div class="text-center">
+                                    <h5 class="text-info">{{ very_good_count }}</h5>
+                                    <p class="mb-0">Very Good</p>
+                                </div>
+                            </div>
+                            {% endif %}
+                            {% if good_count > 0 %}
+                            <div class="col-md-3">
+                                <div class="text-center">
+                                    <h5 class="text-primary">{{ good_count }}</h5>
+                                    <p class="mb-0">Good</p>
+                                </div>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+                
+                {% if submission.eligible_for_hr %}
+                <div class="alert alert-success mt-3">
+                    <h5><i class="fas fa-check-circle"></i> Recommendation: Proceed to HR Round</h5>
+                    <p class="mb-0">The student has demonstrated sufficient technical knowledge and is recommended for the next interview round.</p>
+                </div>
+                {% else %}
+                <div class="alert alert-warning mt-3">
+                    <h5><i class="fas fa-times-circle"></i> Recommendation: Do Not Proceed to HR Round</h5>
+                    <p class="mb-0">The student needs to improve their technical skills before proceeding to the next round.</p>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

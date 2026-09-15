@@ -1,0 +1,839 @@
+question,answer,type,options
+"What is the output of: print(2 ** 3)?","8","mcq","8,6,9,12"
+"Write a Python function to calculate factorial.","def factorial(n): if n <= 1: return 1; return n * factorial(n-1)","coding",""
+"What is a Python list?","A list is an ordered collection of items in Python, defined with square brackets []","conceptual",""
+"How do you create a dictionary in Python?","{}","mcq","{},[],(),<>"
+"Write a Python function to reverse a string.","def reverse_string(s): return s[::-1]","coding",""
+"What is the difference between list and tuple?","Lists are mutable, tuples are immutable. Lists use [], tuples use ()","conceptual",""
+"What is the purpose of indentation in Python?","Indentation defines code blocks and structure in Python","conceptual",""
+"How do you handle exceptions in Python?","try-except blocks are used to handle exceptions","conceptual",""
+"What is list comprehension in Python?","A concise way to create lists using [expression for item in iterable]","conceptual",""
+"How do you define a function in Python?","def function_name():","coding",""
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Hard
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Medium
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Easy
+Technical,Python,Name a key advantage of List Comprehension.,It offers benefits like improved performance or ease-of-use.,Easy
+Technical,Python,Explain Python concept question 4.,"This concept is used to improve performance, scalability, or code efficiency.",Easy
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Medium
+Technical,Python,Explain Python concept question 620.,"This concept is used to improve performance, scalability, or code efficiency.",Medium
+Technical,Python,Explain Python concept question 543.,"This concept is used to improve performance, scalability, or code efficiency.",Hard
+Technical,Python,When would you prefer GIL over Image Segmentation?,A brief description: GIL.,Medium
+Technical,Python,What is the difference between Context Managers and Image Classification?,Context Managers differs from Image Classification in purpose and implementation.,Medium
+Technical,Python,MCQ 95: Choose the correct option related to Python.,Correct option is based on concept understanding.,Medium
+Technical,Python,MCQ 459: Choose the correct option related to Python.,Correct option is based on concept understanding.,Hard
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Medium
+Technical,Python,Explain Python concept question 136.,"This concept is used to improve performance, scalability, or code efficiency.",Easy
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Medium
+Technical,Python,Name a key advantage of List Comprehension.,It offers benefits like improved performance or ease-of-use.,Hard
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Medium
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Medium
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Hard
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Medium
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Hard
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Hard
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Easy
+Technical,Python,Explain Python concept question 554.,"This concept is used to improve performance, scalability, or code efficiency.",Medium
+Technical,Python,MCQ 375: Choose the correct option related to Python.,Correct option is based on concept understanding.,Hard
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Hard
+Technical,Python,MCQ 536: Choose the correct option related to Python.,Correct option is based on concept understanding.,Medium
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Easy
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Easy
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Medium
+Technical,Python,MCQ 228: Choose the correct option related to Python.,Correct option is based on concept understanding.,Hard
+Technical,Python,How is Generators implemented briefly?,Typically implemented using standard Python techniques and libraries.,Medium
+Technical,Python,Name a key advantage of List Comprehension.,It offers benefits like improved performance or ease-of-use.,Easy
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Easy
+Technical,Python,Explain Python concept question 752.,"This concept is used to improve performance, scalability, or code efficiency.",Medium
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Hard
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Medium
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Medium
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Easy
+Technical,Python,MCQ 256: Choose the correct option related to Python.,Correct option is based on concept understanding.,Easy
+Technical,Python,Explain Python concept question 565.,"This concept is used to improve performance, scalability, or code efficiency.",Easy
+Technical,Python,Explain Python concept question 81.,"This concept is used to improve performance, scalability, or code efficiency.",Hard
+Technical,Python,MCQ 571: Choose the correct option related to Python.,Correct option is based on concept understanding.,Easy
+Technical,Python,MCQ 333: Choose the correct option related to Python.,Correct option is based on concept understanding.,Hard
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Hard
+Technical,Python,MCQ 319: Choose the correct option related to Python.,Correct option is based on concept understanding.,Easy
+Technical,Python,What is the difference between Context Managers and Image Classification?,Context Managers differs from Image Classification in purpose and implementation.,Easy
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Medium
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Hard
+Technical,Python,How is Generators implemented briefly?,Typically implemented using standard Python techniques and libraries.,Hard
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Easy
+Technical,Python,What is the difference between Context Managers and Image Classification?,Context Managers differs from Image Classification in purpose and implementation.,Hard
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Easy
+Technical,Python,Explain Python concept question 994.,"This concept is used to improve performance, scalability, or code efficiency.",Easy
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Easy
+Technical,Python,When would you prefer GIL over Image Segmentation?,A brief description: GIL.,Medium
+Technical,Python,Explain Python concept question 92.,"This concept is used to improve performance, scalability, or code efficiency.",Medium
+Technical,Python,Explain Python concept question 840.,"This concept is used to improve performance, scalability, or code efficiency.",Hard
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Easy
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Medium
+Technical,Python,MCQ 291: Choose the correct option related to Python.,Correct option is based on concept understanding.,Hard
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Easy
+Technical,Python,MCQ 200: Choose the correct option related to Python.,Correct option is based on concept understanding.,Medium
+Technical,Python,What is the main metric used for Decorators?,Common metric is accuracy or domain-specific evaluation.,Easy
+Technical,Python,Explain Python concept question 37.,"This concept is used to improve performance, scalability, or code efficiency.",Easy
+Technical,Python,Explain Python concept question 906.,"This concept is used to improve performance, scalability, or code efficiency.",Hard
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Easy
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Medium
+Technical,Python,MCQ 81: Choose the correct option related to Python.,Correct option is based on concept understanding.,Hard
+Technical,Python,MCQ 102: Choose the correct option related to Python.,Correct option is based on concept understanding.,Hard
+Technical,Python,MCQ 32: Choose the correct option related to Python.,Correct option is based on concept understanding.,Medium
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Easy
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Hard
+Technical,Python,When would you prefer GIL over Image Segmentation?,A brief description: GIL.,Easy
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Medium
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Easy
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Easy
+Technical,Python,Explain Python concept question 829.,"This concept is used to improve performance, scalability, or code efficiency.",Easy
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Easy
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Hard
+Technical,Python,MCQ 137: Choose the correct option related to Python.,Correct option is based on concept understanding.,Medium
+Technical,Python,MCQ 522: Choose the correct option related to Python.,Correct option is based on concept understanding.,Hard
+Technical,Python,MCQ 599: Choose the correct option related to Python.,Correct option is based on concept understanding.,Medium
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Medium
+Technical,Python,MCQ 298: Choose the correct option related to Python.,Correct option is based on concept understanding.,Easy
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Medium
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Easy
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Hard
+Technical,Python,MCQ 109: Choose the correct option related to Python.,Correct option is based on concept understanding.,Easy
+Technical,Python,When would you prefer GIL over Image Segmentation?,A brief description: GIL.,Medium
+Technical,Python,What is the main metric used for Decorators?,Common metric is accuracy or domain-specific evaluation.,Easy
+Technical,Python,MCQ 88: Choose the correct option related to Python.,Correct option is based on concept understanding.,Easy
+Technical,Python,How is Generators implemented briefly?,Typically implemented using standard Python techniques and libraries.,Medium
+Technical,Python,What is the difference between Context Managers and Image Classification?,Context Managers differs from Image Classification in purpose and implementation.,Medium
+Technical,Python,MCQ 18: Choose the correct option related to Python.,Correct option is based on concept understanding.,Hard
+Technical,Python,Explain Python concept question 818.,"This concept is used to improve performance, scalability, or code efficiency.",Medium
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Easy
+Technical,Python,When would you prefer GIL over Image Segmentation?,A brief description: GIL.,Medium
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Medium
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Hard
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Easy
+Technical,Python,MCQ 403: Choose the correct option related to Python.,Correct option is based on concept understanding.,Easy
+Technical,Python,Explain Python concept question 147.,"This concept is used to improve performance, scalability, or code efficiency.",Hard
+Technical,Python,When would you prefer GIL over Image Segmentation?,A brief description: GIL.,Hard
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Easy
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Hard
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Medium
+Technical,Python,MCQ 326: Choose the correct option related to Python.,Correct option is based on concept understanding.,Medium
+Technical,Python,MCQ 361: Choose the correct option related to Python.,Correct option is based on concept understanding.,Easy
+Technical,Python,What is the main metric used for Decorators?,Common metric is accuracy or domain-specific evaluation.,Medium
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Hard
+Technical,Python,MCQ 305: Choose the correct option related to Python.,Correct option is based on concept understanding.,Medium
+Technical,Python,Explain Python concept question 774.,"This concept is used to improve performance, scalability, or code efficiency.",Hard
+Technical,Python,What is the difference between Context Managers and Image Classification?,Context Managers differs from Image Classification in purpose and implementation.,Medium
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Easy
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Easy
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Easy
+Technical,Python,When would you prefer GIL over Image Segmentation?,A brief description: GIL.,Easy
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Easy
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Easy
+Technical,Python,MCQ 487: Choose the correct option related to Python.,Correct option is based on concept understanding.,Easy
+Technical,Python,What is the difference between Context Managers and Image Classification?,Context Managers differs from Image Classification in purpose and implementation.,Medium
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Medium
+Technical,Python,MCQ 347: Choose the correct option related to Python.,Correct option is based on concept understanding.,Medium
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Hard
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Easy
+Technical,Python,What is the main metric used for Decorators?,Common metric is accuracy or domain-specific evaluation.,Easy
+Technical,Python,Explain Python concept question 114.,"This concept is used to improve performance, scalability, or code efficiency.",Hard
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Hard
+Technical,Python,How is Generators implemented briefly?,Typically implemented using standard Python techniques and libraries.,Hard
+Technical,Python,What is the difference between Context Managers and Image Classification?,Context Managers differs from Image Classification in purpose and implementation.,Easy
+Technical,Python,MCQ 186: Choose the correct option related to Python.,Correct option is based on concept understanding.,Hard
+Technical,Python,MCQ 4: Choose the correct option related to Python.,Correct option is based on concept understanding.,Easy
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Medium
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Medium
+Technical,Python,Explain Python concept question 961.,"This concept is used to improve performance, scalability, or code efficiency.",Easy
+Technical,Python,MCQ 340: Choose the correct option related to Python.,Correct option is based on concept understanding.,Easy
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Easy
+Technical,Python,What is the main metric used for Decorators?,Common metric is accuracy or domain-specific evaluation.,Easy
+Technical,Python,MCQ 424: Choose the correct option related to Python.,Correct option is based on concept understanding.,Easy
+Technical,Python,MCQ 368: Choose the correct option related to Python.,Correct option is based on concept understanding.,Medium
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Medium
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Medium
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Hard
+Technical,Python,When would you prefer GIL over Image Segmentation?,A brief description: GIL.,Hard
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Easy
+Technical,Python,MCQ 235: Choose the correct option related to Python.,Correct option is based on concept understanding.,Easy
+Technical,Python,What is the main metric used for Decorators?,Common metric is accuracy or domain-specific evaluation.,Hard
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Medium
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Hard
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Hard
+Technical,Python,MCQ 123: Choose the correct option related to Python.,Correct option is based on concept understanding.,Hard
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Hard
+Technical,Python,How is Generators implemented briefly?,Typically implemented using standard Python techniques and libraries.,Easy
+Technical,Python,When would you prefer GIL over Image Segmentation?,A brief description: GIL.,Medium
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Easy
+Technical,Python,MCQ 417: Choose the correct option related to Python.,Correct option is based on concept understanding.,Hard
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Hard
+Technical,Python,Name a key advantage of List Comprehension.,It offers benefits like improved performance or ease-of-use.,Medium
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Easy
+Technical,Python,Explain Python concept question 213.,"This concept is used to improve performance, scalability, or code efficiency.",Hard
+Technical,Python,Explain Python concept question 609.,"This concept is used to improve performance, scalability, or code efficiency.",Hard
+Technical,Python,MCQ 592: Choose the correct option related to Python.,Correct option is based on concept understanding.,Easy
+Technical,Python,MCQ 564: Choose the correct option related to Python.,Correct option is based on concept understanding.,Hard
+Technical,Python,MCQ 515: Choose the correct option related to Python.,Correct option is based on concept understanding.,Medium
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Hard
+Technical,Python,MCQ 354: Choose the correct option related to Python.,Correct option is based on concept understanding.,Hard
+Technical,Python,MCQ 165: Choose the correct option related to Python.,Correct option is based on concept understanding.,Hard
+Technical,Python,MCQ 221: Choose the correct option related to Python.,Correct option is based on concept understanding.,Medium
+Technical,Python,What is the main metric used for Decorators?,Common metric is accuracy or domain-specific evaluation.,Medium
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Hard
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Hard
+Technical,Python,MCQ 585: Choose the correct option related to Python.,Correct option is based on concept understanding.,Hard
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Easy
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Easy
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Medium
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Medium
+Technical,Python,Explain Python concept question 785.,"This concept is used to improve performance, scalability, or code efficiency.",Medium
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Hard
+Technical,Python,What is the main metric used for Decorators?,Common metric is accuracy or domain-specific evaluation.,Easy
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Easy
+Technical,Python,MCQ 144: Choose the correct option related to Python.,Correct option is based on concept understanding.,Hard
+Technical,Python,Explain Python concept question 191.,"This concept is used to improve performance, scalability, or code efficiency.",Medium
+Technical,Python,Explain Python concept question 378.,"This concept is used to improve performance, scalability, or code efficiency.",Hard
+Technical,Python,MCQ 249: Choose the correct option related to Python.,Correct option is based on concept understanding.,Hard
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Medium
+Technical,Python,Explain Python concept question 730.,"This concept is used to improve performance, scalability, or code efficiency.",Easy
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Medium
+Technical,Python,MCQ 25: Choose the correct option related to Python.,Correct option is based on concept understanding.,Easy
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Medium
+Technical,Python,MCQ 60: Choose the correct option related to Python.,Correct option is based on concept understanding.,Hard
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Hard
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Hard
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Hard
+Technical,Python,MCQ 242: Choose the correct option related to Python.,Correct option is based on concept understanding.,Medium
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Easy
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Medium
+Technical,Python,MCQ 270: Choose the correct option related to Python.,Correct option is based on concept understanding.,Hard
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Easy
+Technical,Python,MCQ 543: Choose the correct option related to Python.,Correct option is based on concept understanding.,Hard
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Easy
+Technical,Python,Explain Python concept question 631.,"This concept is used to improve performance, scalability, or code efficiency.",Easy
+Technical,Python,Name a key advantage of List Comprehension.,It offers benefits like improved performance or ease-of-use.,Easy
+Technical,Python,Name a key advantage of List Comprehension.,It offers benefits like improved performance or ease-of-use.,Easy
+Technical,Python,MCQ 277: Choose the correct option related to Python.,Correct option is based on concept understanding.,Easy
+Technical,Python,MCQ 410: Choose the correct option related to Python.,Correct option is based on concept understanding.,Medium
+Technical,Python,MCQ 389: Choose the correct option related to Python.,Correct option is based on concept understanding.,Medium
+Technical,Python,Explain Python concept question 873.,"This concept is used to improve performance, scalability, or code efficiency.",Hard
+Technical,Python,What is the difference between Context Managers and Image Classification?,Context Managers differs from Image Classification in purpose and implementation.,Medium
+Technical,Python,Explain Python concept question 499.,"This concept is used to improve performance, scalability, or code efficiency.",Easy
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Easy
+Technical,Python,Explain Python concept question 983.,"This concept is used to improve performance, scalability, or code efficiency.",Medium
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Medium
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Hard
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Easy
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Hard
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Medium
+Technical,Python,MCQ 193: Choose the correct option related to Python.,Correct option is based on concept understanding.,Easy
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Medium
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Hard
+Technical,Python,MCQ 396: Choose the correct option related to Python.,Correct option is based on concept understanding.,Hard
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Hard
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Medium
+Technical,Python,MCQ 263: Choose the correct option related to Python.,Correct option is based on concept understanding.,Medium
+Technical,Python,Explain Python concept question 862.,"This concept is used to improve performance, scalability, or code efficiency.",Easy
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Medium
+Technical,Python,MCQ 529: Choose the correct option related to Python.,Correct option is based on concept understanding.,Easy
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Easy
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Hard
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Hard
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Hard
+Technical,Python,How is Generators implemented briefly?,Typically implemented using standard Python techniques and libraries.,Hard
+Technical,Python,MCQ 508: Choose the correct option related to Python.,Correct option is based on concept understanding.,Easy
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Hard
+Technical,Python,How is Generators implemented briefly?,Typically implemented using standard Python techniques and libraries.,Medium
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Easy
+Technical,Python,MCQ 550: Choose the correct option related to Python.,Correct option is based on concept understanding.,Easy
+Technical,Python,What is the difference between Context Managers and Image Classification?,Context Managers differs from Image Classification in purpose and implementation.,Easy
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Easy
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Medium
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Hard
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Medium
+Technical,Python,Name a key advantage of List Comprehension.,It offers benefits like improved performance or ease-of-use.,Hard
+Technical,Python,Explain Python concept question 345.,"This concept is used to improve performance, scalability, or code efficiency.",Hard
+Technical,Python,MCQ 431: Choose the correct option related to Python.,Correct option is based on concept understanding.,Medium
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Medium
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Easy
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Medium
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Hard
+Technical,Python,Name a key advantage of List Comprehension.,It offers benefits like improved performance or ease-of-use.,Easy
+Technical,Python,MCQ 494: Choose the correct option related to Python.,Correct option is based on concept understanding.,Medium
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Hard
+Technical,Python,Explain Python concept question 389.,"This concept is used to improve performance, scalability, or code efficiency.",Medium
+Technical,Python,MCQ 39: Choose the correct option related to Python.,Correct option is based on concept understanding.,Hard
+Technical,Python,Explain Python concept question 807.,"This concept is used to improve performance, scalability, or code efficiency.",Hard
+Technical,Python,MCQ 480: Choose the correct option related to Python.,Correct option is based on concept understanding.,Hard
+Technical,Python,How is Generators implemented briefly?,Typically implemented using standard Python techniques and libraries.,Easy
+Technical,Python,Explain Python concept question 367.,"This concept is used to improve performance, scalability, or code efficiency.",Easy
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Medium
+Technical,Python,MCQ 158: Choose the correct option related to Python.,Correct option is based on concept understanding.,Medium
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Medium
+Technical,Python,Explain Python concept question 312.,"This concept is used to improve performance, scalability, or code efficiency.",Hard
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Hard
+Technical,Python,MCQ 130: Choose the correct option related to Python.,Correct option is based on concept understanding.,Easy
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Medium
+Technical,Python,How is Generators implemented briefly?,Typically implemented using standard Python techniques and libraries.,Medium
+Technical,Python,MCQ 151: Choose the correct option related to Python.,Correct option is based on concept understanding.,Easy
+Technical,Python,What is the difference between Context Managers and Image Classification?,Context Managers differs from Image Classification in purpose and implementation.,Easy
+Technical,Python,Explain Python concept question 103.,"This concept is used to improve performance, scalability, or code efficiency.",Easy
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Hard
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Easy
+Technical,Python,MCQ 46: Choose the correct option related to Python.,Correct option is based on concept understanding.,Easy
+Technical,Python,MCQ 11: Choose the correct option related to Python.,Correct option is based on concept understanding.,Medium
+Technical,Python,MCQ 74: Choose the correct option related to Python.,Correct option is based on concept understanding.,Medium
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Easy
+Technical,Python,MCQ 438: Choose the correct option related to Python.,Correct option is based on concept understanding.,Hard
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Medium
+Technical,Python,MCQ 207: Choose the correct option related to Python.,Correct option is based on concept understanding.,Hard
+Technical,Python,MCQ 473: Choose the correct option related to Python.,Correct option is based on concept understanding.,Medium
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Easy
+Technical,Python,Explain Python concept question 576.,"This concept is used to improve performance, scalability, or code efficiency.",Hard
+Technical,Python,Explain Python concept question 928.,"This concept is used to improve performance, scalability, or code efficiency.",Easy
+Technical,Python,MCQ 382: Choose the correct option related to Python.,Correct option is based on concept understanding.,Easy
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Hard
+Technical,Python,MCQ 116: Choose the correct option related to Python.,Correct option is based on concept understanding.,Medium
+Technical,Python,Explain Python concept question 268.,"This concept is used to improve performance, scalability, or code efficiency.",Easy
+Technical,Python,Name a key advantage of List Comprehension.,It offers benefits like improved performance or ease-of-use.,Medium
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Hard
+Technical,Python,MCQ 445: Choose the correct option related to Python.,Correct option is based on concept understanding.,Easy
+Technical,Python,Explain Python concept question 477.,"This concept is used to improve performance, scalability, or code efficiency.",Hard
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Easy
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Easy
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Easy
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Hard
+Technical,Python,Explain Python concept question 719.,"This concept is used to improve performance, scalability, or code efficiency.",Medium
+Technical,Python,Explain Python concept question 741.,"This concept is used to improve performance, scalability, or code efficiency.",Hard
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Hard
+Technical,Python,What is the difference between Context Managers and Image Classification?,Context Managers differs from Image Classification in purpose and implementation.,Hard
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Hard
+Technical,Python,MCQ 214: Choose the correct option related to Python.,Correct option is based on concept understanding.,Easy
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Medium
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Hard
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Easy
+Technical,Python,When would you prefer GIL over Image Segmentation?,A brief description: GIL.,Medium
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Easy
+Technical,Python,What is the main metric used for Decorators?,Common metric is accuracy or domain-specific evaluation.,Easy
+Technical,Python,MCQ 452: Choose the correct option related to Python.,Correct option is based on concept understanding.,Medium
+Technical,Python,MCQ 53: Choose the correct option related to Python.,Correct option is based on concept understanding.,Medium
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Medium
+Technical,Python,Explain Python concept question 895.,"This concept is used to improve performance, scalability, or code efficiency.",Easy
+Technical,Python,What is the main metric used for Decorators?,Common metric is accuracy or domain-specific evaluation.,Easy
+Technical,Python,MCQ 578: Choose the correct option related to Python.,Correct option is based on concept understanding.,Medium
+Technical,Python,What is the difference between Context Managers and Image Classification?,Context Managers differs from Image Classification in purpose and implementation.,Medium
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Medium
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Hard
+Technical,Python,Explain Python concept question 851.,"This concept is used to improve performance, scalability, or code efficiency.",Medium
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Easy
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Hard
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Easy
+Technical,Python,Explain Python concept question 301.,"This concept is used to improve performance, scalability, or code efficiency.",Easy
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Hard
+Technical,Python,Name a key advantage of List Comprehension.,It offers benefits like improved performance or ease-of-use.,Hard
+Technical,Python,Name a key advantage of List Comprehension.,It offers benefits like improved performance or ease-of-use.,Medium
+Technical,Python,MCQ 172: Choose the correct option related to Python.,Correct option is based on concept understanding.,Easy
+Technical,Python,MCQ 466: Choose the correct option related to Python.,Correct option is based on concept understanding.,Easy
+Technical,Python,Name a key advantage of List Comprehension.,It offers benefits like improved performance or ease-of-use.,Easy
+Technical,Python,MCQ 284: Choose the correct option related to Python.,Correct option is based on concept understanding.,Medium
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Hard
+Technical,Python,Explain Python concept question 433.,"This concept is used to improve performance, scalability, or code efficiency.",Easy
+Technical,Python,Explain Python concept question 48.,"This concept is used to improve performance, scalability, or code efficiency.",Hard
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Medium
+Technical,Python,What is the difference between Context Managers and Image Classification?,Context Managers differs from Image Classification in purpose and implementation.,Hard
+Technical,Python,Explain Python concept question 708.,"This concept is used to improve performance, scalability, or code efficiency.",Hard
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Easy
+Technical,Python,MCQ 179: Choose the correct option related to Python.,Correct option is based on concept understanding.,Medium
+Technical,Python,MCQ 501: Choose the correct option related to Python.,Correct option is based on concept understanding.,Hard
+Technical,Python,What is the main metric used for Decorators?,Common metric is accuracy or domain-specific evaluation.,Easy
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Medium
+Technical,Python,MCQ 312: Choose the correct option related to Python.,Correct option is based on concept understanding.,Hard
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Hard
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Medium
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Medium
+Technical,Python,Explain Python concept question 158.,"This concept is used to improve performance, scalability, or code efficiency.",Medium
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Medium
+Technical,Python,What is the main metric used for Decorators?,Common metric is accuracy or domain-specific evaluation.,Medium
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Hard
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Medium
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Medium
+Technical,Python,"What will be the output of the following Python code?
+
+x = [1, 2, 3]
+print(x[::-1])",Answer depends on operator precedence and execution order.,Easy
+Technical,Python,MCQ 557: Choose the correct option related to Python.,Correct option is based on concept understanding.,Medium

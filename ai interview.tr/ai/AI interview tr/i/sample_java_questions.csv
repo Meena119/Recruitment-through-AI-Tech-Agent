@@ -1,0 +1,11 @@
+question,answer,type,options
+"What is the output of: System.out.println(5 + 3);","8","mcq","8,5,3,53"
+"Write a Java method to calculate factorial.","public static int factorial(int n) { if (n <= 1) return 1; return n * factorial(n-1); }","coding",
+"What is a Java class?","A class is a blueprint for creating objects in Java","conceptual",
+"How do you declare an array in Java?","int[] arr = new int[10];","mcq","int[] arr = new int[10];,int arr[] = new int[10];,array arr = new int[10];,int arr[10];"
+"Write a Java method to reverse a string.","public static String reverse(String s) { return new StringBuilder(s).reverse().toString(); }","coding",
+"What is the difference between abstract class and interface?","Abstract class can have implementation, interface cannot have implementation (before Java 8)","conceptual",
+"Which keyword is used to inherit a class in Java?","extends","mcq","extends,implements,inherits,extends"
+"How do you handle exceptions in Java?","try-catch block","coding",
+"What is polymorphism in Java?","Polymorphism allows objects of different classes to be treated as objects of a common superclass","conceptual",
+"What is the default value of an int variable in Java?","0","mcq","0,null,1,undefined"

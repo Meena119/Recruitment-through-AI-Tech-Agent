@@ -1,0 +1,412 @@
+{% extends "base.html" %}
+
+{% block title %}Upload Dataset - AI Interview Platform{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-10">
+        <div class="card shadow">
+            <div class="card-header bg-primary text-white">
+                <h3 class="mb-0"><i class="fas fa-database"></i> Upload Question Dataset</h3>
+            </div>
+            <div class="card-body">
+                <!-- Upload Format Selection -->
+                <div class="mb-4">
+                    <div class="btn-group w-100" role="group">
+                        <input type="radio" class="btn-check" name="upload_format" id="format_json" value="json" checked>
+                        <label class="btn btn-outline-primary" for="format_json">
+                            <i class="fas fa-code"></i> JSON Format
+                        </label>
+                        
+                        <input type="radio" class="btn-check" name="upload_format" id="format_csv" value="csv">
+                        <label class="btn btn-outline-primary" for="format_csv">
+                            <i class="fas fa-file-csv"></i> CSV File Upload
+                        </label>
+                    </div>
+                </div>
+
+                <!-- JSON Upload Section -->
+                <div id="json_section">
+                    <div class="alert alert-info">
+                        <h5><i class="fas fa-info-circle"></i> JSON Dataset Format</h5>
+                        <p>Upload your questions and answers in JSON format. The system will use these questions for technical interviews and evaluate student answers based on similarity with your provided answers.</p>
+                        <pre class="bg-light p-3 rounded">
+{
+  "questions": [
+    {
+      "question": "Write a function to reverse a string in Python.",
+      "answer": "def reverse_string(s): return s[::-1]"
+    },
+    {
+      "question": "Explain the difference between list and tuple.",
+      "answer": "Lists are mutable, tuples are immutable."
+    }
+  ]
+}</pre>
+                    </div>
+                </div>
+
+                <!-- CSV Upload Section -->
+                <div id="csv_section" style="display: none;">
+                    <div class="alert alert-info">
+                        <h5><i class="fas fa-file-csv"></i> CSV Dataset Format</h5>
+                        <p>Upload your questions and answers from a CSV file. The CSV should have columns for questions and answers.</p>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h6>Expected CSV Format:</h6>
+                                <table class="table table-sm table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>question</th>
+                                            <th>answer</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Your question here</td>
+                                            <td>Your answer here</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col-md-6">
+                                <h6>Or with custom column names:</h6>
+                                <table class="table table-sm table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Question_Text</th>
+                                            <th>Answer_Text</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Your question here</td>
+                                            <td>Your answer here</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <form method="POST" enctype="multipart/form-data">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="domain" class="form-label">Programming Domain *</label>
+                            <select class="form-select" id="domain" name="domain" required>
+                                <option value="">Select domain</option>
+                                <option value="python">Python</option>
+                                <option value="c">C</option>
+                                <option value="cpp">C++</option>
+                                <option value="java">Java</option>
+                                <option value="javascript">JavaScript</option>
+                                <option value="sql">SQL</option>
+                                <option value="web">Web Development</option>
+                                <option value="algorithms">Algorithms</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Sample Datasets</label>
+                            <div class="btn-group w-100">
+                                <button type="button" class="btn btn-outline-primary" onclick="loadSampleDataset('python')">
+                                    Python Sample
+                                </button>
+                                <button type="button" class="btn btn-outline-primary" onclick="loadSampleDataset('c')">
+                                    C Sample
+                                </button>
+                                <button type="button" class="btn btn-outline-primary" onclick="loadSampleDataset('cpp')">
+                                    C++ Sample
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- JSON Input -->
+                    <div id="json_input">
+                        <div class="mb-3">
+                            <label for="dataset" class="form-label">Dataset JSON *</label>
+                            <textarea class="form-control" id="dataset" name="dataset" rows="15"
+                                      placeholder="Paste your JSON dataset here..."></textarea>
+                            <div class="form-text">
+                                <i class="fas fa-lightbulb"></i>
+                                Make sure your JSON is properly formatted. Each question should have both "question" and "answer" fields.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CSV Input -->
+                    <div id="csv_input" style="display: none;">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="csv_file" class="form-label">CSV File *</label>
+                                <input type="file" class="form-control" id="csv_file" name="csv_file" 
+                                       accept=".csv" onchange="previewCSV()">
+                                <div class="form-text">
+                                    <i class="fas fa-file-csv"></i>
+                                    Select a CSV file containing questions and answers
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="csv_question_col" class="form-label">Question Column Name</label>
+                                <input type="text" class="form-control" id="csv_question_col" name="csv_question_col" 
+                                       value="question" placeholder="question">
+                                <div class="form-text">Name of the column containing questions</div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="csv_answer_col" class="form-label">Answer Column Name</label>
+                                <input type="text" class="form-control" id="csv_answer_col" name="csv_answer_col" 
+                                       value="answer" placeholder="answer">
+                                <div class="form-text">Name of the column containing answers</div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div id="csv_preview" class="mt-4">
+                                    <!-- CSV preview will be shown here -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <button type="button" class="btn btn-outline-secondary" onclick="validateData()">
+                                <i class="fas fa-check-circle"></i> Validate
+                            </button>
+                        </div>
+                        <div class="col-md-6 text-end">
+                            <div id="validationResult"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="alert alert-warning mt-3">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <strong>Important:</strong> Once uploaded, this dataset will be used for all technical interviews in the selected domain. Make sure your answers are comprehensive and accurate.
+                    </div>
+                    
+                    <div class="d-flex justify-content-between">
+                        <a href="{{ url_for('company_dashboard') }}" class="btn btn-secondary">
+                            <i class="fas fa-arrow-left"></i> Back to Dashboard
+                        </a>
+                        <button type="submit" class="btn btn-primary btn-lg">
+                            <i class="fas fa-upload"></i> Upload Dataset
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+const sampleDatasets = {
+    python: {
+        questions: [
+            {
+                question: "Write a function to reverse a string in Python.",
+                answer: "def reverse_string(s): return s[::-1]"
+            },
+            {
+                question: "Explain the difference between list and tuple in Python.",
+                answer: "Lists are mutable and can be modified after creation, while tuples are immutable and cannot be changed once created. Lists use square brackets [], tuples use parentheses ()."
+            },
+            {
+                question: "Write a function to check if a number is prime.",
+                answer: "def is_prime(n): if n < 2: return False; for i in range(2, int(n**0.5) + 1): if n % i == 0: return False; return True"
+            },
+            {
+                question: "What is the time complexity of binary search? Explain your answer.",
+                answer: "O(log n). Binary search divides the search space in half with each comparison, making it very efficient for sorted arrays."
+            },
+            {
+                question: "Write a function to find the factorial of a number using recursion.",
+                answer: "def factorial(n): if n == 0 or n == 1: return 1; return n * factorial(n-1)"
+            }
+        ]
+    },
+    c: {
+        questions: [
+            {
+                question: "Write a function to reverse a string in C.",
+                answer: "void reverse(char *str) { int len = strlen(str); for(int i = 0; i < len/2; i++) { char temp = str[i]; str[i] = str[len-1-i]; str[len-1-i] = temp; } }"
+            },
+            {
+                question: "Explain the difference between malloc and calloc.",
+                answer: "malloc allocates memory without initializing it (contains garbage values), while calloc allocates and initializes memory to zero. calloc also takes two parameters (number of elements and size of each element)."
+            },
+            {
+                question: "Write a function to check if a number is prime.",
+                answer: "int isPrime(int n) { if(n < 2) return 0; for(int i = 2; i*i <= n; i++) if(n % i == 0) return 0; return 1; }"
+            },
+            {
+                question: "What is a pointer in C?",
+                answer: "A pointer is a variable that stores the memory address of another variable. It allows direct memory manipulation and dynamic memory allocation."
+            },
+            {
+                question: "Write a function to find the factorial of a number using recursion.",
+                answer: "int factorial(int n) { if(n <= 1) return 1; return n * factorial(n-1); }"
+            }
+        ]
+    },
+    cpp: {
+        questions: [
+            {
+                question: "Write a function to reverse a string in C++.",
+                answer: "string reverseString(string s) { reverse(s.begin(), s.end()); return s; }"
+            },
+            {
+                question: "Explain the difference between struct and class in C++.",
+                answer: "In C++, struct members are public by default, while class members are private by default. Otherwise, they are essentially the same - both can have methods, constructors, and support inheritance."
+            },
+            {
+                question: "Write a function to check if a number is prime.",
+                answer: "bool isPrime(int n) { if(n < 2) return false; for(int i = 2; i*i <= n; i++) if(n % i == 0) return false; return true; }"
+            },
+            {
+                question: "What is polymorphism in C++?",
+                answer: "Polymorphism allows objects of different classes to be treated as objects of a common superclass. It includes compile-time polymorphism (function overloading) and runtime polymorphism (virtual functions)."
+            },
+            {
+                question: "Write a function to find the factorial of a number using recursion.",
+                answer: "int factorial(int n) { if(n <= 1) return 1; return n * factorial(n-1); }"
+            }
+        ]
+    }
+};
+
+// Toggle between JSON and CSV upload
+document.querySelectorAll('input[name="upload_format"]').forEach(radio => {
+    radio.addEventListener('change', function() {
+        if (this.value === 'json') {
+            document.getElementById('json_section').style.display = 'block';
+            document.getElementById('json_input').style.display = 'block';
+            document.getElementById('csv_section').style.display = 'none';
+            document.getElementById('csv_input').style.display = 'none';
+        } else {
+            document.getElementById('json_section').style.display = 'none';
+            document.getElementById('json_input').style.display = 'none';
+            document.getElementById('csv_section').style.display = 'block';
+            document.getElementById('csv_input').style.display = 'block';
+        }
+    });
+});
+
+function loadSampleDataset(domain) {
+    const dataset = sampleDatasets[domain];
+    document.getElementById('dataset').value = JSON.stringify(dataset, null, 2);
+    document.getElementById('domain').value = domain;
+}
+
+function validateData() {
+    const format = document.querySelector('input[name="upload_format"]:checked').value;
+    const resultDiv = document.getElementById('validationResult');
+    
+    if (format === 'json') {
+        validateJSON();
+    } else {
+        validateCSV();
+    }
+}
+
+function validateJSON() {
+    const jsonText = document.getElementById('dataset').value;
+    const resultDiv = document.getElementById('validationResult');
+    
+    try {
+        const data = JSON.parse(jsonText);
+        
+        // Validate structure
+        if (!data.questions || !Array.isArray(data.questions)) {
+            throw new Error('Dataset must contain a "questions" array');
+        }
+        
+        // Validate each question
+        for (let i = 0; i < data.questions.length; i++) {
+            const q = data.questions[i];
+            if (!q.question || !q.answer) {
+                throw new Error(`Question ${i+1} missing required "question" or "answer" field`);
+            }
+        }
+        
+        resultDiv.innerHTML = '<span class="badge bg-success"><i class="fas fa-check"></i> Valid JSON (' + data.questions.length + ' questions)</span>';
+        
+    } catch (error) {
+        resultDiv.innerHTML = '<span class="badge bg-danger"><i class="fas fa-times"></i> ' + error.message + '</span>';
+    }
+}
+
+function validateCSV() {
+    const fileInput = document.getElementById('csv_file');
+    const resultDiv = document.getElementById('validationResult');
+    
+    if (!fileInput.files.length) {
+        resultDiv.innerHTML = '<span class="badge bg-danger"><i class="fas fa-times"></i> No file selected</span>';
+        return;
+    }
+    
+    const file = fileInput.files[0];
+    const reader = new FileReader();
+    
+    reader.onload = function(e) {
+        try {
+            const text = e.target.result;
+            const lines = text.split('\n').filter(line => line.trim());
+            
+            if (lines.length < 2) {
+                throw new Error('CSV file must have at least a header and one data row');
+            }
+            
+            resultDiv.innerHTML = '<span class="badge bg-success"><i class="fas fa-check"></i> Valid CSV (' + (lines.length - 1) + ' questions)</span>';
+            
+        } catch (error) {
+            resultDiv.innerHTML = '<span class="badge bg-danger"><i class="fas fa-times"></i> ' + error.message + '</span>';
+        }
+    };
+    
+    reader.readAsText(file);
+}
+
+function previewCSV() {
+    const fileInput = document.getElementById('csv_file');
+    const previewDiv = document.getElementById('csv_preview');
+    
+    if (!fileInput.files.length) {
+        previewDiv.innerHTML = '';
+        return;
+    }
+    
+    const file = fileInput.files[0];
+    const reader = new FileReader();
+    
+    reader.onload = function(e) {
+        const text = e.target.result;
+        const lines = text.split('\n').filter(line => line.trim());
+        
+        if (lines.length > 0) {
+            const headers = lines[0].split(',').map(h => h.trim());
+            const firstRow = lines[1] ? lines[1].split(',').map(r => r.trim()) : [];
+            
+            let previewHTML = '<h6>CSV Preview:</h6><table class="table table-sm"><thead><tr>';
+            headers.forEach(header => {
+                previewHTML += `<th>${header}</th>`;
+            });
+            previewHTML += '</tr></thead><tbody><tr>';
+            firstRow.forEach(cell => {
+                previewHTML += `<td>${cell.substring(0, 30)}${cell.length > 30 ? '...' : ''}</td>`;
+            });
+            previewHTML += '</tr></tbody></table>';
+            
+            previewDiv.innerHTML = previewHTML;
+        }
+    };
+    
+    reader.readAsText(file);
+}
+
+// Auto-validate on input
+document.getElementById('dataset').addEventListener('input', validateJSON);
+</script>
+{% endblock %}

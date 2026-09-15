@@ -1,0 +1,179 @@
+{% extends "base.html" %}
+
+{% block title %}TRI Candidates - {{ current_user.name }}{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+                    <h5 class="mb-0">
+                        <i class="fas fa-users"></i> TRI Candidates
+                    </h5>
+                </div>
+                <div class="card-body">
+                    {% if candidates %}
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Candidate Name</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th>Score</th>
+                                    <th>Status</th>
+                                    <th>Submitted</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for candidate in candidates %}
+                                <tr>
+                                    <td>{{ candidate.student_name }}</td>
+                                    <td>{{ candidate.student_email }}</td>
+                                    <td>{{ candidate.phone or 'Not provided' }}</td>
+                                    <td>
+                                        <span class="badge bg-{{ 'success' if candidate.eligible_for_hr else 'warning' }}">
+                                            {{ candidate.score }}/100
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <span class="badge bg-{{ 'success' if candidate.eligible_for_hr else 'warning' }}">
+                                            {{ 'Eligible for TRI' if candidate.eligible_for_hr else 'Not Eligible' }}
+                                        </span>
+                                    </td>
+                                    <td>{{ candidate.submitted_at.strftime('%Y-%m-%d %H:%M') if candidate.submitted_at else 'Not submitted' }}</td>
+                                    <td>
+                                        {% if not candidate.tri_scheduled %}
+                                            <button class="btn btn-primary btn-sm" onclick="scheduleTri('{{ candidate._id }}')">
+                                                <i class="fas fa-calendar"></i> Schedule TRI
+                                            </button>
+                                        {% else %}
+                                            <span class="badge bg-info">Scheduled</span>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    {% else %}
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle"></i>
+                        No candidates have passed the exam yet for TRI round.
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Schedule TRI Modal -->
+<div class="modal fade" id="scheduleTriModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Schedule TRI Interview</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="scheduleTriForm" method="POST">
+                    <div class="mb-3">
+                        <label class="form-label">Interview Date</label>
+                        <input type="date" name="interview_date" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Interview Time</label>
+                        <input type="time" name="interview_time" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Interview Type</label>
+                        <select name="interview_type" class="form-control" required>
+                            <option value="technical">Technical</option>
+                            <option value="hr">HR</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Interviewer Name</label>
+                        <input type="text" name="interviewer_name" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Interviewer Email</label>
+                        <input type="email" name="interviewer_email" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Notes</label>
+                        <textarea name="notes" class="form-control" rows="3"></textarea>
+                    </div>
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-calendar-check"></i> Schedule Interview
+                        </button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                            Cancel
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+function scheduleTri(candidateId) {
+    // Show the modal
+    const modal = new bootstrap.Modal(document.getElementById('scheduleTriModal'));
+    modal.show();
+    
+    // Store candidate ID for later use
+    window.currentCandidateId = candidateId;
+}
+
+function submitTriSchedule(event) {
+    event.preventDefault();
+    
+    // Get form values
+    const form = document.getElementById('scheduleTriForm');
+    const formData = new FormData(form);
+    const candidateId = window.currentCandidateId;
+    
+    // Submit via AJAX
+    fetch(`/company/schedule_tri/${candidateId}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: new URLSearchParams(formData)
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            // Close modal and reload page
+            bootstrap.Modal.getInstance(document.getElementById('scheduleTriModal')).hide();
+            location.reload();
+        } else {
+            alert('Error scheduling interview: ' + data.message);
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Error scheduling interview');
+    });
+}
+
+// Add form submit handler
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('scheduleTriForm');
+    if (form) {
+        form.addEventListener('submit', submitTriSchedule);
+    }
+});
+</script>
+{% endblock %}

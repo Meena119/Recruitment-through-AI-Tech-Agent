@@ -1,0 +1,11 @@
+question,answer,type,options
+"What is the output of: console.log(typeof null);","object","mcq","object,null,undefined,string"
+"Write a JavaScript function to calculate factorial.","function factorial(n) { if (n <= 1) return 1; return n * factorial(n-1); }","coding",
+"What is a closure in JavaScript?","A closure is a function that has access to variables in its outer scope","conceptual",
+"How do you declare a constant in JavaScript?","const PI = 3.14;","mcq","const PI = 3.14;,var PI = 3.14;,let PI = 3.14;,constant PI = 3.14;"
+"Write a JavaScript function to reverse a string.","function reverseString(s) { return s.split('').reverse().join(''); }","coding",
+"What is the difference between let and const?","let allows reassignment, const does not","conceptual",
+"Which method is used to add elements to an array in JavaScript?","push()","mcq","push(),add(),append(),insert()"
+"How do you create a promise in JavaScript?","new Promise()","coding",
+"What is hoisting in JavaScript?","Hoisting is JavaScript's behavior of moving declarations to the top","conceptual",
+"What is the output of: [1,2,3] + [4,5,6]?","1,2,34,5,6","mcq","1,2,34,5,6,[1,2,3,4,5,6],[1,2,3] + [4,5,6],error"

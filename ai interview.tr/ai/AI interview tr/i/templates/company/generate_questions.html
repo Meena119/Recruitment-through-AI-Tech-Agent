@@ -1,0 +1,182 @@
+{% extends "base.html" %}
+
+{% block title %}Generate Questions - AI Interview Platform{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card shadow">
+            <div class="card-header bg-gradient-primary text-white">
+                <h3 class="mb-0"><i class="fas fa-magic"></i> AI-Powered Question Generation</h3>
+            </div>
+            <div class="card-body">
+                <div class="alert alert-info">
+                    <h5><i class="fas fa-robot"></i> Generate Questions with AI</h5>
+                    <p>Use advanced AI to generate high-quality technical questions for your interviews. The system will create questions based on current industry standards and best practices.</p>
+                </div>
+
+                <form method="POST">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="domain" class="form-label">Programming Domain *</label>
+                            <select class="form-select" id="domain" name="domain" required>
+                                <option value="">Select domain</option>
+                                <option value="python">Python</option>
+                                <option value="java">Java</option>
+                                <option value="cpp">C++</option>
+                                <option value="javascript">JavaScript</option>
+                                <option value="sql">SQL</option>
+                                <option value="web">Web Development</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="count" class="form-label">Number of Questions *</label>
+                            <input type="number" class="form-control" id="count" name="count" 
+                                   min="5" max="50" value="10" required>
+                            <div class="form-text">Generate 5-50 questions</div>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-12">
+                            <h6><i class="fas fa-info-circle"></i> Question Types Generated:</h6>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="card border-primary">
+                                        <div class="card-body text-center">
+                                            <i class="fas fa-code text-primary fs-3"></i>
+                                            <h6 class="mt-2">Coding Questions</h6>
+                                            <small class="text-muted">50% of questions</small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="card border-success">
+                                        <div class="card-body text-center">
+                                            <i class="fas fa-list-check text-success fs-3"></i>
+                                            <h6 class="mt-2">Multiple Choice</h6>
+                                            <small class="text-muted">33% of questions</small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="card border-info">
+                                        <div class="card-body text-center">
+                                            <i class="fas fa-lightbulb text-info fs-3"></i>
+                                            <h6 class="mt-2">Conceptual</h6>
+                                            <small class="text-muted">17% of questions</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="alert alert-warning">
+                        <h6><i class="fas fa-exclamation-triangle"></i> Important Notes:</h6>
+                        <ul class="mb-0">
+                            <li>Generated questions will be saved and can be uploaded to your dataset</li>
+                            <li>Questions are based on current industry standards and best practices</li>
+                            <li>You can review and edit questions before final upload</li>
+                            <li>AI generation may take a few moments for larger question sets</li>
+                        </ul>
+                    </div>
+
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <a href="{{ url_for('company_dashboard') }}" class="btn btn-secondary">
+                            <i class="fas fa-arrow-left"></i> Back to Dashboard
+                        </a>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-magic"></i> Generate Questions
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- AI Features Section -->
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fas fa-brain"></i> AI Generation Features</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-3 mb-3">
+                        <div class="text-center">
+                            <div class="feature-icon bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
+                                <i class="fas fa-robot"></i>
+                            </div>
+                            <h6>Smart Generation</h6>
+                            <p class="small text-muted">AI creates relevant, industry-standard questions</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <div class="text-center">
+                            <div class="feature-icon bg-success text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
+                                <i class="fas fa-balance-scale"></i>
+                            </div>
+                            <h6>Balanced Mix</h6>
+                            <p class="small text-muted">Optimal distribution of question types</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <div class="text-center">
+                            <div class="feature-icon bg-info text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <h6>Difficulty Scaling</h6>
+                            <p class="small text-muted">Questions range from basic to advanced</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <div class="text-center">
+                            <div class="feature-icon bg-warning text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
+                                <i class="fas fa-sync"></i>
+                            </div>
+                            <h6>Unique Content</h6>
+                            <p class="small text-muted">Each generation creates unique questions</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Add form validation
+    const form = document.querySelector('form');
+    const domainSelect = document.getElementById('domain');
+    const countInput = document.getElementById('count');
+    
+    form.addEventListener('submit', function(e) {
+        if (!domainSelect.value) {
+            e.preventDefault();
+            alert('Please select a programming domain');
+            domainSelect.focus();
+            return;
+        }
+        
+        const count = parseInt(countInput.value);
+        if (count < 5 || count > 50) {
+            e.preventDefault();
+            alert('Please enter a number between 5 and 50');
+            countInput.focus();
+            return;
+        }
+        
+        // Show loading state
+        const submitBtn = form.querySelector('button[type="submit"]');
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generating...';
+        submitBtn.disabled = true;
+    });
+});
+</script>
+{% endblock %}

@@ -1,0 +1,160 @@
+{% extends "base.html" %}
+
+{% block title %}TRI Schedule - {{ current_user.name }}{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+                    <h5 class="mb-0">
+                        <i class="fas fa-calendar-alt"></i> TRI Interview Schedule
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h6 class="mb-0">Candidate Details</h6>
+                                </div>
+                                <div class="card-body">
+                                    <p><strong>Name:</strong> {{ candidate.student_name }}</p>
+                                    <p><strong>Email:</strong> {{ candidate.student_email }}</p>
+                                    <p><strong>Phone:</strong> {{ candidate.phone or 'Not provided' }}</p>
+                                    <p><strong>Score:</strong> 
+                                        <span class="badge bg-{{ 'success' if candidate.eligible_for_hr else 'warning' }}">
+                                            {{ candidate.score }}/100
+                                        </span>
+                                    </p>
+                                    <p><strong>Status:</strong> 
+                                        <span class="badge bg-info">{{ candidate.status }}</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h6 class="mb-0">Interview Schedule</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="mb-3">
+                                        <label><strong>Interview Date:</strong> {{ schedule.interview_date }}</label>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label><strong>Interview Time:</strong> {{ schedule.interview_time }}</label>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label><strong>Interview Type:</strong> {{ schedule.interview_type }}</label>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label><strong>Interviewer:</strong> {{ schedule.interviewer_name }}</label>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label><strong>Interviewer Email:</strong> {{ schedule.interviewer_email }}</label>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label><strong>Notes:</strong></label>
+                                        <p>{{ schedule.notes or 'No notes provided' }}</p>
+                                    </div>
+                                    
+                                    <div class="mt-3">
+                                        {% if schedule.status == 'scheduled' %}
+                                            <button class="btn btn-primary" onclick="updateTriStatus('{{ schedule._id }}', 'completed')">
+                                                <i class="fas fa-check"></i> Mark as Completed
+                                            </button>
+                                            <button class="btn btn-warning" onclick="updateTriStatus('{{ schedule._id }}', 'cancelled')">
+                                                <i class="fas fa-times"></i> Cancel Interview
+                                            </button>
+                                        {% elif schedule.status == 'completed' %}
+                                            <span class="badge bg-success">Interview Completed</span>
+                                        {% elif schedule.status == 'cancelled' %}
+                                            <span class="badge bg-danger">Interview Cancelled</span>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-3">
+                            <a href="{{ url_for('tri_candidates') }}" class="btn btn-secondary">
+                                <i class="fas fa-arrow-left"></i> Back to Candidates
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Update Status Modal -->
+<div class="modal fade" id="updateStatusModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Update Interview Status</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="POST" action="{{ url_for('update_tri_status', schedule_id=schedule._id) }}">
+                    <div class="mb-3">
+                        <label class="form-label">New Status</label>
+                        <select name="status" class="form-control" required>
+                            <option value="scheduled">Scheduled</option>
+                            <option value="completed">Completed</option>
+                            <option value="cancelled">Cancelled</option>
+                        </select>
+                    </div>
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i> Update Status
+                        </button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                            Cancel
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+function updateTriStatus(scheduleId, newStatus) {
+    // Get form values
+    const status = document.querySelector('select[name="status"]').value;
+    
+    // Submit form
+    fetch(`/company/update_tri_status/${scheduleId}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: new URLSearchParams({
+            'status': status
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            location.reload();
+        } else {
+            alert('Error updating status: ' + data.message);
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Error updating status');
+    });
+}
+</script>
+{% endblock %}

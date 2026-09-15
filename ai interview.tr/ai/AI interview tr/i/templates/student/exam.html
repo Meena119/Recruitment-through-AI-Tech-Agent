@@ -1,0 +1,1483 @@
+{% extends "base.html" %}
+
+{% block styles %}
+<style>
+    /* Modern Dark Interface Styles */
+    :root {
+        --dark-bg: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+        --card-bg: rgba(255, 255, 255, 0.05);
+        --text-light: #ffffff;
+        --text-muted: #b0b3b8;
+        --accent: #00d4ff;
+        --success: #00ff88;
+        --warning: #ffaa00;
+        --danger: #ff4444;
+        --glass-bg: rgba(255, 255, 255, 0.1);
+    }
+
+    body {
+        background: var(--dark-bg);
+        color: var(--text-light);
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        min-height: 100vh;
+        margin: 0;
+        padding: 0;
+    }
+
+    .exam-container {
+        padding: 20px;
+        background: var(--glass-bg);
+        border-radius: 20px;
+        backdrop-filter: blur(20px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    /* Enhanced Card Styles */
+    .card {
+        background: var(--card-bg);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        transition: all 0.3s ease;
+        overflow: hidden;
+        position: relative;
+        backdrop-filter: blur(10px);
+    }
+
+    .card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: linear-gradient(90deg, var(--accent), var(--success), var(--warning), var(--danger));
+        animation: gradient-shift 4s ease-in-out infinite;
+    }
+
+    @keyframes gradient-shift {
+        0%, 100% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+        border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .card-header {
+        background: var(--glass-bg);
+        color: var(--text-light);
+        border: none;
+        border-radius: 20px 20px 0 0;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        position: relative;
+        overflow: hidden;
+        backdrop-filter: blur(10px);
+    }
+
+    .card-header::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+        animation: shimmer 3s infinite;
+    }
+
+    @keyframes shimmer {
+        0% { left: -100%; }
+        100% { left: 100%; }
+    }
+
+    .card-body {
+        padding: 25px;
+        background: var(--card-bg);
+        border-radius: 0 0 20px 20px;
+        backdrop-filter: blur(10px);
+    }
+
+    /* Enhanced Header */
+    .bg-primary {
+        background: var(--glass-bg) !important;
+        color: var(--text-light) !important;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    /* Webcam Section */
+    #webcam {
+        border-radius: 15px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        border: 2px solid var(--accent);
+    }
+
+    /* Timer Styles */
+    #timer {
+        font-size: 3.5rem;
+        font-weight: 800;
+        color: var(--accent);
+        text-shadow: 0 0 20px var(--accent);
+        animation: pulse-glow 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes pulse-glow {
+        0% { text-shadow: 0 0 10px var(--accent), 0 0 20px var(--accent); }
+        100% { text-shadow: 0 0 20px var(--accent), 0 0 30px var(--accent); }
+    }
+
+    /* Enhanced Buttons */
+    .btn {
+        border-radius: 25px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        transition: all 0.3s ease;
+        border: 2px solid transparent;
+        position: relative;
+        overflow: hidden;
+        backdrop-filter: blur(10px);
+    }
+
+    .btn::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 0;
+        height: 0;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.2);
+        transform: translate(-50%, -50%);
+        transition: width 0.6s, height 0.6s;
+    }
+
+    .btn:hover::before {
+        width: 300px;
+        height: 300px;
+    }
+
+    .btn-success {
+        background: var(--success);
+        color: #000;
+        border-color: var(--success);
+        box-shadow: 0 5px 15px rgba(0, 255, 136, 0.3);
+    }
+
+    .btn-danger {
+        background: var(--danger);
+        color: #fff;
+        border-color: var(--danger);
+        box-shadow: 0 5px 15px rgba(255, 68, 68, 0.3);
+    }
+
+    .btn-primary {
+        background: var(--accent);
+        color: #000;
+        border-color: var(--accent);
+        box-shadow: 0 5px 15px rgba(0, 212, 255, 0.3);
+    }
+
+    .btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Enhanced Domain Buttons */
+    .domain-btn {
+        border-radius: 25px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        background: var(--glass-bg);
+        border: 2px solid var(--accent);
+        color: var(--text-light);
+        position: relative;
+        overflow: hidden;
+        transition: all 0.3s ease;
+    }
+
+    .domain-btn::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+        transition: left 0.5s;
+    }
+
+    .domain-btn:hover::before {
+        left: 100%;
+    }
+
+    .domain-btn:hover {
+        transform: translateY(-3px) scale(1.02);
+        box-shadow: 0 10px 25px rgba(0, 212, 255, 0.4);
+        background: var(--accent);
+        color: #000;
+    }
+
+    /* Question Cards */
+    .question-card {
+        background: var(--card-bg);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        transition: all 0.3s ease;
+        overflow: hidden;
+    }
+
+    .question-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(90deg, var(--accent), var(--success), var(--warning), var(--danger));
+        animation: gradient-shift 5s ease-in-out infinite;
+    }
+
+    .question-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+    }
+
+    .question-header {
+        background: var(--glass-bg);
+        color: var(--text-light);
+        padding: 20px;
+        border-radius: 20px 20px 0 0;
+        position: relative;
+        backdrop-filter: blur(10px);
+    }
+
+    .question-text {
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: var(--text-light);
+        line-height: 1.6;
+        margin-bottom: 20px;
+    }
+
+    /* Enhanced Form Controls */
+    .form-control {
+        background: var(--glass-bg);
+        border: 2px solid rgba(255, 255, 255, 0.2);
+        border-radius: 15px;
+        padding: 15px 20px;
+        font-size: 16px;
+        transition: all 0.3s ease;
+        color: var(--text-light);
+        backdrop-filter: blur(10px);
+    }
+
+    .form-control:focus {
+        border-color: var(--accent);
+        box-shadow: 0 0 0 4px rgba(0, 212, 255, 0.2);
+        background: rgba(255, 255, 255, 0.15);
+    }
+
+    .form-control::placeholder {
+        color: var(--text-muted);
+    }
+
+    /* Enhanced Badges */
+    .badge {
+        border-radius: 20px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        padding: 8px 16px;
+        font-size: 0.75rem;
+        background: var(--glass-bg);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    /* Alert Styles */
+    .alert {
+        background: var(--glass-bg);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 15px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        color: var(--text-light);
+        backdrop-filter: blur(10px);
+    }
+
+    .alert-warning {
+        border-left-color: var(--warning);
+    }
+
+    .alert-info {
+        border-left-color: var(--accent);
+    }
+
+    /* Custom styles for multiple choice questions */
+    .options-container {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .option-item {
+        background: var(--glass-bg);
+        border: 2px solid rgba(255, 255, 255, 0.2) !important;
+        border-radius: 15px !important;
+        padding: 20px !important;
+        transition: all 0.3s ease;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+        backdrop-filter: blur(10px);
+    }
+
+    .option-item::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+        transition: left 0.5s;
+    }
+
+    .option-item:hover::before {
+        left: 100%;
+    }
+
+    .option-item:hover {
+        border-color: var(--accent) !important;
+        transform: translateY(-3px) scale(1.01);
+        box-shadow: 0 10px 25px rgba(0, 212, 255, 0.2);
+    }
+
+    .option-item input[type="radio"]:checked + .form-check-label {
+        background: var(--success);
+        border-color: var(--success) !important;
+        color: #000;
+        font-weight: 700;
+        transform: scale(1.01);
+    }
+
+    .option-item input[type="radio"]:checked + .form-check-label::before {
+        content: '✓';
+        position: absolute;
+        right: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: var(--accent);
+        color: #000;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        font-size: 16px;
+        box-shadow: 0 3px 10px rgba(0, 212, 255, 0.3);
+    }
+
+    .form-check-label {
+        display: flex;
+        align-items: center;
+        padding: 12px 16px;
+        border-radius: 10px;
+        transition: all 0.3s ease;
+        margin-bottom: 0 !important;
+        width: 100%;
+        font-weight: 600;
+        color: var(--text-light);
+    }
+
+    .option-letter {
+        background: var(--accent);
+        color: #000;
+        padding: 6px 12px;
+        border-radius: 10px;
+        font-weight: 700;
+        font-size: 14px;
+        margin-right: 15px;
+        min-width: 40px;
+        text-align: center;
+        box-shadow: 0 3px 10px rgba(0, 212, 255, 0.3);
+    }
+
+    .option-text {
+        flex: 1;
+        font-size: 16px;
+        line-height: 1.6;
+        color: var(--text-light);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .exam-container {
+            padding: 10px;
+        }
+
+        .card-body {
+            padding: 15px;
+        }
+
+        #timer {
+            font-size: 2.5rem;
+        }
+    }
+
+    @keyframes float {
+        0%, 100% { transform: translateY(0px); }
+        50% { transform: translateY(-10px); }
+    }
+
+    .timer-paragraph {
+        font-size: 0.9rem;
+        color: var(--text-muted);
+        margin-top: 10px;
+        text-align: center;
+    }
+</style>
+{% endblock %}
+
+{% block title %}Take Exam - AI Interview Platform{% endblock %}
+
+{% block content %}
+<div class="exam-container">
+    <!-- Header with job info -->
+    <div class="row mb-3">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0"><i class="fas fa-pencil-alt"></i> {{ job.title }} - Technical Exam</h4>
+                </div>
+                <div class="card-body">
+                    <p class="mb-2"><strong>Company:</strong> {{ job.company_name }}</p>
+                    <p class="mb-0"><strong>Duration:</strong> {{ job.duration }} minutes</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Domain Selection -->
+    <div class="row mb-3" id="domainSelection">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5><i class="fas fa-code"></i> Select Programming Domain</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        {% for domain in job.domains %}
+                        <div class="col-md-3 mb-2">
+                            <button class="btn btn-outline-primary domain-btn w-100"
+                                onclick="selectDomain('{{ domain }}', this)"
+                                onmouseover="console.log('Hovering over domain:', '{{ domain }}')"
+                                onmousedown="console.log('Mouse down on domain:', '{{ domain }}')">
+                                <i class="fas fa-code"></i> {{ domain.upper() }}
+                            </button>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Questions Section -->
+    <div class="row" id="questionsSection" style="display: none;">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h5><i class="fas fa-question-circle"></i> Technical Questions</h5>
+                </div>
+                <div class="card-body">
+                    <form id="examForm" onsubmit="submitExam(event)">
+                        <input type="hidden" name="job_id" value="{{ job._id }}">
+                        <input type="hidden" name="domain" id="selectedDomain">
+                        <input type="hidden" name="audio_transcripts" id="audioTranscripts">
+                        <input type="hidden" name="exam_session_id" value="{{ exam_session_id }}">
+
+                        <!-- Questions from dataset -->
+                        {% if questions %}
+                        {% for question in questions %}
+                        {% set question_index = loop.index0 %}
+                        <div class="question-card mb-4" data-question-text="{{ question.question|e }}"
+                            data-question-type="{{ question.get('type', 'coding') }}">
+                            <div class="question-header">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="badge bg-light text-dark me-2" style="font-size: 0.9rem;">{{ loop.index
+                                        }}</span>
+                                    <div class="flex-grow-1">
+                                        <h6 class="mb-2">
+                                            {% if question.get('type') == 'mcq' %}
+                                            <i class="fas fa-list-check"></i> Multiple Choice Question
+                                            {% elif question.get('type') == 'coding' %}
+                                            <i class="fas fa-code"></i> Coding Question
+                                            {% elif question.get('type') == 'conceptual' %}
+                                            <i class="fas fa-edit"></i> Conceptual Question
+                                            {% else %}
+                                            <i class="fas fa-question-circle"></i> Programming Question
+                                            {% endif %}
+                                        </h6>
+                                    </div>
+                                    <span class="badge bg-light text-dark" style="font-size: 0.8rem;">
+                                        {{ question.get('difficulty', 'Medium') }}
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="card-body">
+                                <div class="question-text">
+                                    {{ question.question|e }}
+                                </div>
+
+                                <!-- MCQ Options -->
+                                {% if question.get('type') == 'mcq' %}
+                                <div class="answer-section">
+                                    <label class="form-label fw-bold">
+                                        <i class="fas fa-dot-circle"></i> Select Your Answer:
+                                    </label>
+                                    <div class="options-container">
+                                        {% for option_index, option in [('A', question.get('options', [])[0]), ('B', question.get('options', [])[1]), ('C', question.get('options', [])[2]), ('D', question.get('options', [])[3])] %}
+                                        <div class="form-check option-item">
+                                            <input class="form-check-input" type="radio" name="q{{ question_index + 1 }}"
+                                                value="{{ option|e }}" id="q{{ question_index + 1 }}_{{ loop.index }}">
+                                            <label class="form-check-label w-100 cursor-pointer"
+                                                for="q{{ question_index + 1 }}_{{ loop.index }}">
+                                                <span class="option-letter">{{ option_index }}.</span>
+                                                <span class="option-text">{{ option|e }}</span>
+                                            </label>
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+
+                                    <!-- Explanation (if available) -->
+                                    {% if question.get('explanation') %}
+                                    <div class="mt-3 p-2 bg-info bg-opacity-10 rounded border border-info">
+                                        <small class="text-info">
+                                            <i class="fas fa-lightbulb"></i>
+                                            <strong>Hint:</strong> {{ question.explanation|e }}
+                                        </small>
+                                    </div>
+                                    {% endif %}
+                                </div>
+
+                                <!-- Coding Questions -->
+                                {% elif question.get('type') == 'coding' %}
+                                <div class="answer-section">
+                                    <label class="form-label fw-bold">
+                                        <i class="fas fa-code"></i> Write Your Code:
+                                    </label>
+                                    <div class="mb-2">
+                                        <span class="badge bg-info">
+                                            <i class="fas fa-code"></i> Coding Question - Type Your Answer
+                                        </span>
+                                    </div>
+                                    <textarea class="form-control font-monospace" name="q{{ question_index + 1 }}" rows="8"
+                                        placeholder="Write your code solution here..."
+                                        id="textarea-{{ loop.index }}"></textarea>
+
+                                    <!-- Coding Help -->
+                                    <div class="mt-3 p-3 bg-info bg-opacity-10 rounded border border-info">
+                                        <small class="text-info">
+                                            <i class="fas fa-info-circle"></i>
+                                            <strong>Coding Tip:</strong> Write your code solution using proper syntax.
+                                            Include function definitions and logic as required.
+                                        </small>
+                                    </div>
+                                </div>
+
+                                <!-- Conceptual Questions -->
+                                {% elif question.get('type') == 'conceptual' %}
+                                <div class="answer-section">
+                                    <label class="form-label fw-bold">
+                                        <i class="fas fa-edit"></i> Your Answer:
+                                    </label>
+                                    <div class="mb-2">
+                                        <span class="badge bg-success">
+                                            <i class="fas fa-comments"></i> Conceptual Question - You Can Speak or Type
+                                        </span>
+                                    </div>
+                                    <textarea class="form-control font-monospace" name="q{{ question_index + 1 }}" rows="6"
+                                        placeholder="Type your answer or click the microphone to speak"
+                                        id="textarea-{{ loop.index }}"></textarea>
+
+                                    <!-- Speech Recognition Controls -->
+                                    <div id="speech-controls-{{ loop.index }}" class="mt-3 p-3 bg-light rounded">
+                                        <div class="d-flex align-items-center justify-content-between mb-2">
+                                            <small class="text-muted">
+                                                <i class="fas fa-microphone"></i>
+                                                Voice-to-Text Available (Click textarea and speak)
+                                            </small>
+                                            <div class="btn-group btn-group-sm" role="group">
+                                                <button type="button" class="btn btn-outline-success"
+                                                    onclick="startAudioRecording('q{{ loop.index }}')"
+                                                    title="Start voice recording">
+                                                    <i class="fas fa-microphone"></i>
+                                                </button>
+                                                <button type="button" class="btn btn-outline-danger"
+                                                    onclick="stopAudioRecordingForQuestion('q{{ loop.index }}')"
+                                                    title="Stop voice recording">
+                                                    <i class="fas fa-stop"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                        <!-- Interim transcript display -->
+                                        <div id="interim_q{{ loop.index }}" class="text-primary small"
+                                            style="display: none; font-style: italic;"></div>
+
+                                        <!-- Error display -->
+                                        <div id="error_q{{ loop.index }}" style="display: none;"></div>
+
+                                        <!-- Final transcript display -->
+                                        <div id="transcript_q{{ loop.index }}" class="mt-2 p-2 bg-white rounded border"
+                                            style="display: none;">
+                                            <small class="text-muted">
+                                                <strong><i class="fas fa-closed-captioning"></i> Voice
+                                                    Transcript:</strong>
+                                            </small>
+                                            <div id="transcript_text_q{{ loop.index }}" class="small text-dark mt-1">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Default/Fallback Questions -->
+                                {% else %}
+                                <div class="answer-section">
+                                    <label class="form-label fw-bold">
+                                        <i class="fas fa-edit"></i> Your Answer:
+                                    </label>
+                                    <div class="mb-2" id="question-type-{{ loop.index }}">
+                                        <span class="badge bg-secondary">
+                                            <i class="fas fa-question-circle"></i> General Question
+                                        </span>
+                                    </div>
+                                    <textarea class="form-control font-monospace" name="q{{ question_index + 1 }}" rows="6"
+                                        placeholder="Type your answer here..."
+                                        id="textarea-{{ loop.index }}"></textarea>
+
+                                    <!-- Speech Recognition Controls -->
+                                    <div id="speech-controls-{{ loop.index }}" style="display: none;"
+                                        class="mt-3 p-3 bg-light rounded">
+                                        <div class="d-flex align-items-center justify-content-between mb-2">
+                                            <small class="text-muted">
+                                                <i class="fas fa-microphone"></i>
+                                                Voice-to-Text Available (Click textarea and speak)
+                                            </small>
+                                            <div class="btn-group btn-group-sm" role="group">
+                                                <button type="button" class="btn btn-outline-success"
+                                                    onclick="startAudioRecording('q{{ loop.index }}')"
+                                                    title="Start voice recording">
+                                                    <i class="fas fa-microphone"></i>
+                                                </button>
+                                                <button type="button" class="btn btn-outline-danger"
+                                                    onclick="stopAudioRecordingForQuestion('q{{ loop.index }}')"
+                                                    title="Stop voice recording">
+                                                    <i class="fas fa-stop"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                        <!-- Interim transcript display -->
+                                        <div id="interim_q{{ loop.index }}" class="text-primary small"
+                                            style="display: none; font-style: italic;"></div>
+
+                                        <!-- Error display -->
+                                        <div id="error_q{{ loop.index }}" style="display: none;"></div>
+
+                                        <!-- Final transcript display -->
+                                        <div id="transcript_q{{ loop.index }}" class="mt-2 p-2 bg-white rounded border"
+                                            style="display: none;">
+                                            <small class="text-muted">
+                                                <strong><i class="fas fa-closed-captioning"></i> Voice
+                                                    Transcript:</strong>
+                                            </small>
+                                            <div id="transcript_text_q{{ loop.index }}" class="small text-dark mt-1">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Coding Question Help -->
+                                    <div id="coding-help-{{ loop.index }}" style="display: none;"
+                                        class="mt-2 p-2 bg-info bg-opacity-10 rounded border border-info">
+                                        <small class="text-info">
+                                            <i class="fas fa-info-circle"></i>
+                                            <strong>Coding Tip:</strong> Write your code solution using proper syntax.
+                                            Include function definitions and logic as required.
+                                        </small>
+                                    </div>
+                                </div>
+                                {% endif %}
+                            </div>
+                            {% endfor %}
+                            {% else %}
+                            <div class="alert alert-warning">
+                                <h5><i class="fas fa-exclamation-triangle"></i> No Questions Available</h5>
+                                <p>No questions are available for this exam. Please try again later or contact support.
+                                </p>
+                            </div>
+                            {% endif %}
+
+                            <div class="d-flex justify-content-between">
+                                <button type="button" class="btn btn-secondary" onclick="goBack()">
+                                    <i class="fas fa-arrow-left"></i> Back
+                                </button>
+                                <button type="submit" class="btn btn-success btn-lg">
+                                    <i class="fas fa-check"></i> Submit Exam
+                                </button>
+                            </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+<!-- NEW CODE-->
+ <!-- RIGHT SIDEBAR -->
+<div class="col-md-4 position-relative">
+
+    <!-- Webcam Card (RIGHT ALIGNED & STICKY) -->
+    <div class="card mb-3" style="position: sticky; top: 20px; right: 0;">
+        <div class="card-header bg-danger text-white">
+            <h6 class="mb-0"><i class="fas fa-video"></i> Webcam Monitoring</h6>
+        </div>
+
+        <div class="card-body p-2 text-center">
+            <video id="webcam" width="100%" height="200" muted class="border rounded"></video>
+
+            <div class="mt-2">
+                <span id="webcamStatus" class="badge bg-warning">
+                    <i class="fas fa-exclamation-triangle"></i> Webcam Off
+                </span>
+            </div>
+
+            <div class="mt-2">
+                <button type="button" class="btn btn-success btn-sm" onclick="startWebcam()">
+                    <i class="fas fa-video"></i> Start Webcam
+                </button>
+
+                <button type="button" class="btn btn-danger btn-sm" onclick="stopWebcam()">
+                    <i class="fas fa-video-slash"></i> Stop Webcam
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- TIMER CARD -->
+    <div class="card mb-3" style="position: sticky; top: 320px;">
+        <div class="card-header">
+            <h5 class="mb-0"><i class="fas fa-clock"></i> Exam Timer</h5>
+        </div>
+
+        <div class="card-body text-center">
+            <div class="display-4 text-primary mb-3"
+                 id="timer"
+                 data-duration="{{ job.duration }}">
+                00:00
+            </div>
+
+            <div class="text-muted">
+                <i class="fas fa-hourglass-half"></i> Time Remaining
+            </div>
+
+            <div class="mt-2">
+                <small class="text-muted">Duration: {{ job.duration }} minutes</small>
+            </div>
+
+            <p class="timer-paragraph">
+                Time is ticking! Manage wisely. Auto-submit when time ends.
+            </p>
+        </div>
+    </div>
+
+
+    <!-- INSTRUCTIONS -->
+    <div class="card">
+        <div class="card-header">
+            <h6><i class="fas fa-info-circle"></i> Exam Instructions</h6>
+        </div>
+
+        <div class="card-body">
+            <ul class="list-unstyled">
+                <li><i class="fas fa-check text-success"></i> Answer all questions</li>
+                <li><i class="fas fa-check text-success"></i> Keep webcam active</li>
+                <li><i class="fas fa-check text-success"></i> No tab switching</li>
+                <li><i class="fas fa-check text-success"></i> Submit before time</li>
+            </ul>
+
+            <div class="alert alert-danger">
+                <strong>Important:</strong>  
+                Max 3 tab switches → auto submit.
+            </div>
+
+            <div class="alert alert-warning">
+                Leaving page or disabling webcam may disqualify you.
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+        <!--<div class="col-md-4">
+            Webcam Monitoring - Top Right
+            <div style="position: absolute; top: 20px; right: 40px; z-index: 10; width: 320px; transform: translateZ(0); background: white; border: 1px solid #ddd; border-radius: 10px;">
+                <div class="card mb-3">
+                    <div class="card-header bg-danger text-white">
+                        <h6><i class="fas fa-video"></i> Webcam Monitoring</h6>
+                    </div>
+                    <div class="card-body p-2">
+                        <div class="text-center">
+                            <video id="webcam" width="100%" height="200" muted class="border rounded"></video>
+                            <div class="mt-2">
+                                <span id="webcamStatus" class="badge bg-warning">
+                                    <i class="fas fa-exclamation-triangle"></i> Webcam Off
+                                </span>
+                            </div>
+                            <div class="mt-2">
+                                <button type="button" class="btn btn-success btn-sm" onclick="startWebcam()">
+                                    <i class="fas fa-video"></i> Start Webcam
+                                </button>
+                                <button type="button" class="btn btn-danger btn-sm" onclick="stopWebcam()">
+                                    <i class="fas fa-video-slash"></i> Stop Webcam
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+            <!-- Exam Timer -->
+            <div class="card mb-3" style="position: absolute; bottom: 250px; right: 40px; z-index: -10; width: 250px; animation: float 3s ease-in-out infinite;">
+                <div class="card-header" style="background: var(--gradient-dark); color: white;">
+                    <h5 class="mb-0"><i class="fas fa-clock"></i> Exam Timer</h5>
+                </div>
+                <div class="card-body text-center">
+                    <div class="display-4 text-primary mb-3" id="timer" data-duration="{{ job.duration }}">00:00</div>
+                    <div class="text-muted">
+                        <i class="fas fa-hourglass-half"></i> Time Remaining
+                    </div>
+                    <div class="mt-3">
+                        <small class="text-muted">Duration: {{ job.duration }} minutes</small>
+                    </div>
+                    <p class="timer-paragraph">Time is ticking! Manage your time wisely. The exam will auto-submit when time expires.</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <h6><i class="fas fa-info-circle"></i> Exam Instructions</h6>
+                </div>
+                <div class="card-body">
+                    <ul class="list-unstyled">
+                        <li><i class="fas fa-check text-success"></i> Answer all questions</li>
+                        <li><i class="fas fa-check text-success"></i> Keep webcam active</li>
+                        <li><i class="fas fa-check text-success"></i> Manage your time wisely</li>
+                        <li><i class="fas fa-check text-success"></i> Submit before time expires</li>
+                    </ul>
+                    <div class="alert alert-danger">
+                        <i class="fas fa-ban"></i>
+                        <strong>Important:</strong> Tab switching is strictly prohibited. Maximum 3 switches allowed. Auto-submission will occur on the 3rd switch.
+                    </div>
+                    <div class="alert alert-warning mt-2">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <strong>Warning:</strong> Leaving the page or disabling webcam may result in disqualification.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>->
+
+<!-- Results Modal -->
+<div class="modal fade" id="resultsModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Exam Results</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body" id="resultsContent">
+                <!-- Results will be loaded here -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="goToDashboard()">Go to Dashboard</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    /* ================= STATE ================= */
+    let selectedDomain = '';
+    let timer = null;
+    let recognition = null;
+    let isRecording = false;
+    let currentQuestion = null;
+    let audioTranscripts = {};
+    let examSubmitted = false;
+    let webcamStream = null;
+    let webcamActive = false;
+    let tabSwitchCount = 0;
+    let lastActiveTime = Date.now();
+    let tabWarningShown = false;
+
+    /* ================= SPEECH ================= */
+    function initSpeechRecognition() {
+        if (!('webkitSpeechRecognition' in window || 'SpeechRecognition' in window)) {
+            console.warn("Speech not supported");
+            return;
+        }
+
+        const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+        recognition = new SR();
+        recognition.continuous = true;
+        recognition.interimResults = true;
+        recognition.lang = 'en-US';
+
+        recognition.onresult = (event) => {
+            let final = '';
+
+            for (let i = event.resultIndex; i < event.results.length; i++) {
+                if (event.results[i].isFinal) {
+                    final += event.results[i][0].transcript + ' ';
+                }
+            }
+
+            if (final && currentQuestion) {
+                audioTranscripts[currentQuestion] =
+                    (audioTranscripts[currentQuestion] || '') + final;
+
+                updateTranscriptDisplay(currentQuestion);
+            }
+        };
+
+        recognition.onend = () => isRecording = false;
+        recognition.onerror = (event) => {
+            console.error('Speech recognition error:', event.error);
+            isRecording = false;
+        };
+    }
+
+    function startAudioRecording(q) {
+        if (!recognition) {
+            alert('Speech recognition not supported in this browser.');
+            return;
+        }
+
+        if (isRecording) recognition.stop();
+
+        currentQuestion = q;
+        recognition.start();
+        isRecording = true;
+    }
+
+    function stopAudioRecordingForQuestion(q) {
+        if (recognition && isRecording && currentQuestion === q) {
+            recognition.stop();
+        }
+    }
+
+    function updateTranscriptDisplay(q) {
+        const box = document.getElementById(`transcript_${q}`);
+        const text = document.getElementById(`transcript_text_${q}`);
+        const textarea = document.querySelector(`textarea[name="${q}"]`);
+
+        if (!box || !text) return;
+
+        box.style.display = 'block';
+        text.innerText = audioTranscripts[q];
+
+        if (textarea && textarea.value.trim() === '') {
+            textarea.value = audioTranscripts[q];
+        }
+    }
+
+    /* ================= WEBCAM ================= */
+    async function startWebcam() {
+        if (webcamActive) {
+            console.log('Webcam already active');
+            return;
+        }
+        
+        try {
+            const video = document.getElementById('webcam');
+            const status = document.getElementById('webcamStatus');
+            const startBtn = document.querySelector('button[onclick="startWebcam()"]');
+            const stopBtn = document.querySelector('button[onclick="stopWebcam()"]');
+            
+            console.log('Requesting camera access...');
+            
+            // Request camera with better constraints
+            webcamStream = await navigator.mediaDevices.getUserMedia({ 
+                video: {
+                    width: { ideal: 640 },
+                    height: { ideal: 480 },
+                    facingMode: 'user'
+                }, 
+                audio: false 
+            });
+            
+            console.log('Camera access granted, setting video stream...');
+            
+            // Set video source and wait for it to load
+            video.srcObject = webcamStream;
+            
+            // Wait for video to be ready
+            video.onloadedmetadata = () => {
+                console.log('Video metadata loaded, playing...');
+                video.play().then(() => {
+                    webcamActive = true;
+                    
+                    status.className = 'badge bg-success';
+                    status.innerHTML = '<i class="fas fa-video"></i> Webcam Active';
+                    
+                    if (startBtn) startBtn.disabled = true;
+                    if (stopBtn) stopBtn.disabled = false;
+                    
+                    console.log('Webcam started successfully');
+                }).catch(playError => {
+                    console.error('Error playing video:', playError);
+                    status.className = 'badge bg-danger';
+                    status.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Video Play Error';
+                });
+            };
+            
+            // Handle video loading errors
+            video.onerror = (error) => {
+                console.error('Video error:', error);
+                status.className = 'badge bg-danger';
+                status.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Video Error';
+            };
+            
+        } catch (error) {
+            console.error('Error accessing webcam:', error);
+            const status = document.getElementById('webcamStatus');
+            status.className = 'badge bg-danger';
+            
+            // Provide specific error messages
+            if (error.name === 'NotAllowedError') {
+                status.innerHTML = '<i class="fas fa-ban"></i> Camera Permission Denied';
+                alert('Camera permission denied. Please allow camera access in your browser settings and try again.');
+            } else if (error.name === 'NotFoundError') {
+                status.innerHTML = '<i class="fas fa-exclamation-triangle"></i> No Camera Found';
+                alert('No camera device found. Please ensure a camera is connected.');
+            } else if (error.name === 'NotReadableError') {
+                status.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Camera in Use';
+                alert('Camera is already in use by another application. Please close other apps using the camera.');
+            } else {
+                status.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Webcam Error';
+                alert('Unable to access webcam. Please ensure you have granted camera permissions.');
+            }
+        }
+    }
+
+    function stopWebcam() {
+        try {
+            const video = document.getElementById('webcam');
+            const status = document.getElementById('webcamStatus');
+            const startBtn = document.querySelector('button[onclick="startWebcam()"]');
+            const stopBtn = document.querySelector('button[onclick="stopWebcam()"]');
+            
+            console.log('Stopping webcam...');
+            
+            if (webcamStream) {
+                // Stop all tracks
+                webcamStream.getTracks().forEach(track => {
+                    track.stop();
+                    console.log('Track stopped:', track.kind);
+                });
+                
+                // Clear video source
+                video.srcObject = null;
+                video.pause();
+                webcamStream = null;
+            }
+            
+            webcamActive = false;
+            
+            status.className = 'badge bg-warning';
+            status.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Webcam Off';
+            
+            if (startBtn) startBtn.disabled = false;
+            if (stopBtn) stopBtn.disabled = true;
+            
+            console.log('Webcam stopped successfully');
+        } catch (error) {
+            console.error('Error stopping webcam:', error);
+            const status = document.getElementById('webcamStatus');
+            status.className = 'badge bg-danger';
+            status.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Stop Error';
+        }
+    }
+
+    function checkWebcamStatus() {
+        if (!webcamActive && selectedDomain && !examSubmitted) {
+            console.warn('Webcam is not active during exam');
+            // You can add warning logic here if needed
+        }
+    }
+
+    /* ================= DOMAIN ================= */
+    function selectDomain(domain, btn) {
+        selectedDomain = domain;
+        document.getElementById('selectedDomain').value = domain;
+
+        document.querySelectorAll('.domain-btn').forEach(b => {
+            b.classList.remove('btn-primary');
+            b.classList.add('btn-outline-primary');
+        });
+
+        btn.classList.remove('btn-outline-primary');
+        btn.classList.add('btn-primary');
+
+        document.getElementById('domainSelection').style.display = 'none';
+        document.getElementById('questionsSection').style.display = 'block';
+
+        // Auto-start webcam when exam begins
+        autoStartWebcam();
+        
+        startTimer();
+        
+        // Check webcam status periodically
+        setInterval(checkWebcamStatus, 30000); // Check every 30 seconds
+    }
+
+    /* ================= TIMER ================= */
+    function startTimer() {
+        const el = document.getElementById('timer');  // FIXED
+
+        const duration = parseInt(el.dataset.duration) || 30;
+        let timeLeft = duration * 60;
+
+        timer = setInterval(() => {
+            if (timeLeft <= 0) {
+                clearInterval(timer);
+                submitExam(new Event('submit'));
+                return;
+            }
+
+            const m = Math.floor(timeLeft / 60);
+            const s = timeLeft % 60;
+            el.textContent =
+                `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+
+            timeLeft--;
+        }, 1000);
+    }
+
+
+
+    /* ================= SUBMIT ================= */
+    function submitExam(event) {
+        if (event) event.preventDefault();
+
+        if (examSubmitted) return;
+        examSubmitted = true;
+
+        clearInterval(timer);
+
+        if (recognition) {
+            try { recognition.stop(); } catch (e) { }
+        }
+
+        // Stop webcam on exam submission
+        stopWebcam();
+
+        document.querySelector('button[type="submit"]').disabled = true;
+
+        const t = document.getElementById('audioTranscripts');
+        if (t) t.value = JSON.stringify(audioTranscripts);
+
+        const form = document.getElementById('examForm');
+        const formData = new FormData(form);
+        const data = Object.fromEntries(formData);
+
+        fetch('/student/submit_exam', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: new URLSearchParams(data)
+        })
+            .then(r => r.json())
+            .then(res => {
+                if (res.success) {
+                    // 🟢 IMPORTANT: small delay before showing modal
+                    setTimeout(() => {
+                        showResults(res);
+                    }, 100);
+                } else {
+                    examSubmitted = false;
+                    alert(res.message || "Submission failed");
+                }
+            })
+            .catch(e => {
+                examSubmitted = false;
+                console.error(e);
+                alert("Error submitting exam");
+            });
+    }
+
+    /* ================= RESULTS ================= */
+    function showResults(result) {
+        let resultsContent = document.getElementById('resultsContent');
+
+        // 🔧 If modal missing, recreate it dynamically
+        if (!resultsContent) {
+            console.warn("Modal missing. Rebuilding modal...");
+
+            const modalHTML = `
+            <div class="modal fade" id="resultsModal" tabindex="-1">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Exam Results</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body" id="resultsContent"></div>
+                        <div class="modal-footer">
+                            <button class="btn btn-primary" onclick="goToDashboard()">Go to Dashboard</button>
+                        </div>
+                    </div>
+                </div>
+            </div>`;
+
+            document.body.insertAdjacentHTML('beforeend', modalHTML);
+            resultsContent = document.getElementById('resultsContent');
+        }
+
+        // Simple score display
+        resultsContent.innerHTML = `
+            <div class="text-center">
+                <h3>Your Exam Results</h3>
+                <h1 class="display-1 ${result.score >= 70 ? 'text-success' : 'text-warning'}">${result.score}/100</h1>
+                <div class="alert ${result.eligible_for_hr ? 'alert-success' : 'alert-warning'}">
+                    ${result.eligible_for_hr ? "Eligible for HR Round 🎉" : "Not Eligible"}
+                </div>
+            </div>
+        `;
+
+        new bootstrap.Modal(document.getElementById('resultsModal')).show();
+    }
+
+
+    /* ================= TAB SWITCH DETECTION ================= */
+    function handleTabSwitch() {
+        if (!selectedDomain || examSubmitted) return;
+        
+        tabSwitchCount++;
+        console.log(`Tab switch detected. Count: ${tabSwitchCount}`);
+        
+        // Show warning on first tab switch
+        if (tabSwitchCount === 1 && !tabWarningShown) {
+            tabWarningShown = true;
+            showTabSwitchWarning();
+        }
+        
+        // Auto-submit after 3 tab switches
+        if (tabSwitchCount >= 3) {
+            console.log('Maximum tab switches reached. Auto-submitting exam.');
+            forceSubmitExam('Tab switching limit exceeded. Exam auto-submitted.');
+        }
+        
+        // Allow manual reset after 2 tab switches (for testing/fixing scenarios)
+        if (tabSwitchCount === 2 && !examSubmitted) {
+            console.log('Manual reset available after 2 switches.');
+            // Add a small reset button that appears briefly
+            const resetBtn = document.createElement('button');
+            resetBtn.innerHTML = '<i class="fas fa-redo"></i> Reset Counter';
+            resetBtn.className = 'btn btn-outline-warning btn-sm';
+            resetBtn.style.cssText = 'position: fixed; top: 70px; right: 20px; z-index: 1000; font-size: 12px;';
+            resetBtn.onclick = () => {
+                tabSwitchCount = 0;
+                tabWarningShown = false;
+                resetBtn.remove();
+                console.log('Tab switch counter reset manually.');
+            };
+            document.body.appendChild(resetBtn);
+            
+            // Auto-remove after 3 seconds
+            setTimeout(() => {
+                if (resetBtn.parentNode) {
+                    resetBtn.parentNode.removeChild(resetBtn);
+                }
+            }, 3000);
+        }
+        
+        // Reset tab switch count after successful submission
+        if (examSubmitted && tabSwitchCount >= 3) {
+            tabSwitchCount = 0; // Reset for next exam
+        }
+        
+        // Log tab switch for monitoring
+        logTabSwitch();
+    }
+    
+    function showTabSwitchWarning() {
+        const warningDiv = document.createElement('div');
+        warningDiv.className = 'alert alert-warning alert-dismissible fade show position-fixed';
+        warningDiv.style.cssText = 'top: 20px; right: 20px; z-index: 9999; min-width: 300px;';
+        warningDiv.innerHTML = `
+            <h6><i class="fas fa-exclamation-triangle"></i> Tab Switch Detected!</h6>
+            <p class="mb-1">Switching tabs during exam is prohibited.</p>
+            <p class="mb-1"><strong>Warning: ${3 - tabSwitchCount}/3 tab switches remaining.</strong></p>
+            <p class="mb-0">Further switches will result in auto-submission.</p>
+            <p class="mb-2 text-info"><small><i class="fas fa-info-circle"></i> <strong>Testing Fix:</strong> After 2 switches, a reset button appears for 3 seconds to fix issues.</p>
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        `;
+        document.body.appendChild(warningDiv);
+        
+        // Auto-remove warning after 5 seconds
+        setTimeout(() => {
+            if (warningDiv.parentNode) {
+                warningDiv.parentNode.removeChild(warningDiv);
+            }
+        }, 5000);
+    }
+    
+    function logTabSwitch() {
+        // Log to server for monitoring
+        fetch('/student/log_tab_switch', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                exam_session_id: document.querySelector('input[name="exam_session_id"]').value,
+                switch_count: tabSwitchCount,
+                timestamp: new Date().toISOString()
+            })
+        }).catch(e => console.error('Failed to log tab switch:', e));
+    }
+    
+    function forceSubmitExam(reason) {
+        if (examSubmitted) return;
+        
+        // Show final warning
+        const finalWarning = document.createElement('div');
+        finalWarning.className = 'alert alert-danger alert-dismissible fade show position-fixed';
+        finalWarning.style.cssText = 'top: 20px; right: 20px; z-index: 10000; min-width: 350px;';
+        finalWarning.innerHTML = `
+            <h6><i class="fas fa-ban"></i> Exam Auto-Submitted!</h6>
+            <p class="mb-1"><strong>Reason:</strong> ${reason}</p>
+            <p class="mb-0">Your exam has been automatically submitted due to policy violations.</p>
+        `;
+        document.body.appendChild(finalWarning);
+        
+        // Submit exam immediately
+        setTimeout(() => {
+            submitExam(null);
+        }, 2000);
+    }
+    
+    // Track page visibility changes
+    document.addEventListener('visibilitychange', () => {
+        if (document.hidden) {
+            handleTabSwitch();
+        } else {
+            lastActiveTime = Date.now();
+        }
+    });
+    
+    // Track window focus/blur
+    window.addEventListener('blur', () => {
+        if (!document.hidden) {
+            handleTabSwitch();
+        }
+    });
+    
+    window.addEventListener('focus', () => {
+        lastActiveTime = Date.now();
+    });
+    
+    // Track mouse movement to detect inactivity
+    let inactivityTimer;
+    function resetInactivityTimer() {
+        clearTimeout(inactivityTimer);
+        inactivityTimer = setTimeout(() => {
+            if (selectedDomain && !examSubmitted) {
+                console.log('User inactive for too long');
+                // You can add inactivity handling here
+            }
+        }, 300000); // 5 minutes of inactivity
+    }
+    
+    document.addEventListener('mousemove', resetInactivityTimer);
+    document.addEventListener('keypress', resetInactivityTimer);
+    document.addEventListener('click', resetInactivityTimer);
+    document.addEventListener('scroll', resetInactivityTimer);
+
+    /* ================= NAV GUARD ================= */
+    window.addEventListener('beforeunload', e => {
+        if (selectedDomain && !examSubmitted) {
+            // Stop webcam before leaving
+            stopWebcam();
+            e.preventDefault();
+            e.returnValue = '';
+        }
+    });
+
+    /* ================= CLEANUP ================= */
+    window.addEventListener('unload', () => {
+        // Ensure webcam is stopped when page is closed
+        stopWebcam();
+    });
+
+
+    /* ================= WEBCAM AUTO-START ================= */
+    function autoStartWebcam() {
+        // Auto-start webcam when page loads (with user interaction)
+        document.addEventListener('click', function startWebcamOnInteraction() {
+            if (!webcamActive && selectedDomain) {
+                console.log('Auto-starting webcam on user interaction...');
+                startWebcam();
+                document.removeEventListener('click', startWebcamOnInteraction);
+            }
+        }, { once: true });
+    }
+
+    /* ================= LOAD ================= */
+    window.addEventListener('load', () => {
+        initSpeechRecognition();
+        
+        // Check if camera is available
+        if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+            console.log('Camera API is available');
+            
+            // Test camera availability
+            navigator.mediaDevices.getUserMedia({ video: true })
+                .then(stream => {
+                    console.log('Camera test successful');
+                    stream.getTracks().forEach(track => track.stop());
+                })
+                .catch(error => {
+                    console.log('Camera test failed:', error.name);
+                    const status = document.getElementById('webcamStatus');
+                    if (status) {
+                        status.className = 'badge bg-warning';
+                        status.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Camera Not Available';
+                    }
+                });
+        } else {
+            console.log('Camera API not available in this browser');
+            const status = document.getElementById('webcamStatus');
+            if (status) {
+                status.className = 'badge bg-danger';
+                status.innerHTML = '<i class="fas fa-ban"></i> Camera Not Supported';
+            }
+        }
+    });
+</script>
+
+{% endblock %}

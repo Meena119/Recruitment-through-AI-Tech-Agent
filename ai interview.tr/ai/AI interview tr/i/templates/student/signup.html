@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+
+{% block title %}Student Sign Up - AI Interview Platform{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card shadow">
+            <div class="card-header bg-success text-white">
+                <h3 class="mb-0"><i class="fas fa-user-graduate"></i> Student Registration</h3>
+            </div>
+            <div class="card-body">
+                <form method="POST">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="name" class="form-label">Full Name *</label>
+                            <input type="text" class="form-control" id="name" name="name" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="email" class="form-label">Email Address *</label>
+                            <input type="email" class="form-control" id="email" name="email" required>
+                            <div class="form-text" id="emailFeedback"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="password" class="form-label">Password *</label>
+                            <input type="password" class="form-control" id="password" name="password" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="confirm_password" class="form-label">Confirm Password *</label>
+                            <input type="password" class="form-control" id="confirm_password" name="confirm_password" required>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="phone" class="form-label">Phone Number</label>
+                            <input type="tel" class="form-control" id="phone" name="phone" 
+                                   placeholder="+91 9876543210">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="education" class="form-label">Education</label>
+                            <select class="form-select" id="education" name="education">
+                                <option value="">Select education level</option>
+                                <option value="high_school">High School</option>
+                                <option value="undergraduate">Undergraduate</option>
+                                <option value="graduate">Graduate</option>
+                                <option value="postgraduate">Postgraduate</option>
+                                <option value="phd">PhD</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="skills" class="form-label">Technical Skills</label>
+                        <textarea class="form-control" id="skills" name="skills" rows="3" 
+                                  placeholder="e.g., Python, Java, C++, JavaScript, React, Node.js..."></textarea>
+                        <div class="form-text">List your programming languages and technical skills</div>
+                    </div>
+                    
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-success btn-lg">Register Student Account</button>
+                    </div>
+                </form>
+                
+                <div class="text-center mt-3">
+                    <p>Already have an account? <a href="{{ url_for('student_login') }}">Login here</a></p>
+                    <p><a href="{{ url_for('index') }}">Back to Home</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.getElementById('confirm_password').addEventListener('input', function() {
+    const password = document.getElementById('password').value;
+    const confirmPassword = this.value;
+    
+    if (password !== confirmPassword) {
+        this.setCustomValidity('Passwords do not match');
+    } else {
+        this.setCustomValidity('');
+    }
+});
+
+// Email validation
+document.getElementById('email').addEventListener('blur', function() {
+    const email = this.value;
+    const feedback = document.getElementById('emailFeedback');
+    
+    if (email && email.includes('@')) {
+        // Check email availability
+        fetch(`/check-email?email=${encodeURIComponent(email)}&type=student`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.exists) {
+                    feedback.innerHTML = `<span class="text-danger"><i class="fas fa-times"></i> ${data.message}</span>`;
+                    this.setCustomValidity('Email already exists');
+                } else {
+                    feedback.innerHTML = `<span class="text-success"><i class="fas fa-check"></i> Email available</span>`;
+                    this.setCustomValidity('');
+                }
+            })
+            .catch(error => {
+                console.error('Error checking email:', error);
+            });
+    } else {
+        feedback.innerHTML = '';
+    }
+});
+</script>
+{% endblock %}

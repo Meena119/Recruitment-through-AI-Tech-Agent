@@ -1,0 +1,205 @@
+{% extends "base.html" %}
+
+{% block title %}Edit Job - AI Interview Platform{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-10">
+        <div class="card shadow">
+            <div class="card-header bg-warning text-white">
+                <h3 class="mb-0"><i class="fas fa-edit"></i> Edit Job</h3>
+            </div>
+            <div class="card-body">
+                <form method="POST">
+                    <div class="mb-3">
+                        <label for="title" class="form-label">Job Title *</label>
+                        <input type="text" class="form-control" id="title" name="title" required
+                               value="{{ job.title }}"
+                               placeholder="e.g., Software Developer, Data Analyst, etc.">
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Job Description *</label>
+                        <textarea class="form-control" id="description" name="description" rows="4" required
+                                  placeholder="Provide a detailed description of the job role, responsibilities, and what you're looking for...">{{ job.description }}</textarea>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="requirements" class="form-label">Requirements *</label>
+                        <textarea class="form-control" id="requirements" name="requirements" rows="3" required
+                                  placeholder="List the key requirements and qualifications for this position...">{{ job.requirements }}</textarea>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Programming Domains *</label>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="c" id="domain_c" name="domains"
+                                           {% if 'c' in job.domains %}checked{% endif %}>
+                                    <label class="form-check-label" for="domain_c">
+                                        <i class="fas fa-code"></i> C
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="cpp" id="domain_cpp" name="domains"
+                                           {% if 'cpp' in job.domains %}checked{% endif %}>
+                                    <label class="form-check-label" for="domain_cpp">
+                                        <i class="fas fa-code"></i> C++
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="python" id="domain_python" name="domains"
+                                           {% if 'python' in job.domains %}checked{% endif %}>
+                                    <label class="form-check-label" for="domain_python">
+                                        <i class="fab fa-python"></i> Python
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="java" id="domain_java" name="domains"
+                                           {% if 'java' in job.domains %}checked{% endif %}>
+                                    <label class="form-check-label" for="domain_java">
+                                        <i class="fab fa-java"></i> Java
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="javascript" id="domain_javascript" name="domains"
+                                           {% if 'javascript' in job.domains %}checked{% endif %}>
+                                    <label class="form-check-label" for="domain_javascript">
+                                        <i class="fab fa-js"></i> JavaScript
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="sql" id="domain_sql" name="domains"
+                                           {% if 'sql' in job.domains %}checked{% endif %}>
+                                    <label class="form-check-label" for="domain_sql">
+                                        <i class="fas fa-database"></i> SQL
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="web" id="domain_web" name="domains"
+                                           {% if 'web' in job.domains %}checked{% endif %}>
+                                    <label class="form-check-label" for="domain_web">
+                                        <i class="fas fa-globe"></i> Web Development
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="algorithms" id="domain_algorithms" name="domains"
+                                           {% if 'algorithms' in job.domains %}checked{% endif %}>
+                                    <label class="form-check-label" for="domain_algorithms">
+                                        <i class="fas fa-project-diagram"></i> Algorithms
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <label for="duration" class="form-label">Exam Duration (minutes) *</label>
+                            <select class="form-select" id="duration" name="duration" required>
+                                <option value="">Select duration</option>
+                                <option value="30" {% if job.duration == 30 %}selected{% endif %}>30 minutes</option>
+                                <option value="45" {% if job.duration == 45 %}selected{% endif %}>45 minutes</option>
+                                <option value="60" {% if job.duration == 60 %}selected{% endif %}>60 minutes</option>
+                                <option value="90" {% if job.duration == 90 %}selected{% endif %}>90 minutes</option>
+                                <option value="120" {% if job.duration == 120 %}selected{% endif %}>120 minutes</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="difficulty" class="form-label">Difficulty Level</label>
+                            <select class="form-select" id="difficulty" name="difficulty">
+                                <option value="beginner" {% if job.difficulty == 'beginner' %}selected{% endif %}>Beginner</option>
+                                <option value="intermediate" {% if job.difficulty == 'intermediate' or not job.difficulty %}selected{% endif %}>Intermediate</option>
+                                <option value="advanced" {% if job.difficulty == 'advanced' %}selected{% endif %}>Advanced</option>
+                                <option value="expert" {% if job.difficulty == 'expert' %}selected{% endif %}>Expert</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="cutoff_score" class="form-label">TRI Cutoff Score (%) *</label>
+                            <select class="form-select" id="cutoff_score" name="cutoff_score" required>
+                                <option value="">Select cutoff score</option>
+                                <option value="50" {% if job.cutoff_score == 50 %}selected{% endif %}>50% - Basic</option>
+                                <option value="60" {% if job.cutoff_score == 60 %}selected{% endif %}>60% - Fair</option>
+                                <option value="70" {% if job.cutoff_score == 70 or not job.cutoff_score %}selected{% endif %}>70% - Good</option>
+                                <option value="80" {% if job.cutoff_score == 80 %}selected{% endif %}>80% - Excellent</option>
+                                <option value="85" {% if job.cutoff_score == 85 %}selected{% endif %}>85% - Outstanding</option>
+                                <option value="90" {% if job.cutoff_score == 90 %}selected{% endif %}>90% - Exceptional</option>
+                            </select>
+                            <small class="text-muted">Students scoring above this will be eligible for TRI round</small>
+                        </div>
+                    </div>
+                    
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle"></i>
+                        <strong>Note:</strong> Editing this job will not affect exams that have already been taken. New exam takers will see the updated details.
+                    </div>
+                    
+                    <div class="d-flex justify-content-between">
+                        <a href="{{ url_for('company_dashboard') }}" class="btn btn-secondary">
+                            <i class="fas fa-arrow-left"></i> Back to Dashboard
+                        </a>
+                        <button type="submit" class="btn btn-warning btn-lg">
+                            <i class="fas fa-save"></i> Update Job
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-3">
+        <div class="card">
+            <div class="card-header">
+                <h6><i class="fas fa-chart-line"></i> Job Statistics</h6>
+            </div>
+            <div class="card-body">
+                <div class="mb-2">
+                    <small class="text-muted">Posted:</small><br>
+                    <strong>{{ job.created_at.strftime('%Y-%m-%d') }}</strong>
+                </div>
+                <div class="mb-2">
+                    <small class="text-muted">Status:</small><br>
+                    <span class="badge bg-{{ 'success' if job.status == 'active' else 'secondary' }}">
+                        {{ job.status.title() }}
+                    </span>
+                </div>
+                <div class="mb-2">
+                    <small class="text-muted">Applicants:</small><br>
+                    <strong>{{ job.applicants_count or 0 }}</strong>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+// Form validation for domains
+document.querySelector('form').addEventListener('submit', function(e) {
+    const domains = document.querySelectorAll('input[name="domains"]:checked');
+    if (domains.length === 0) {
+        e.preventDefault();
+        alert('Please select at least one programming domain');
+        return false;
+    }
+});
+</script>
+{% endblock %}
